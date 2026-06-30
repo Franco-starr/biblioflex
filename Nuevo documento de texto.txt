@@ -1,0 +1,60 @@
+biblioflex/
+│
+├── admin/
+│   ├──index.php
+│   ├── libros.php
+│   ├── usuarios.php
+│   └── prestamos.php
+│
+├── assets/
+│   ├── css/
+│   ├── js/
+│   └── img/
+│
+├── config/
+│   ├── database.php
+│   └── config.php
+│
+├── includes/
+│   ├── header.php
+│   ├── footer.php
+│   ├── funciones.php
+│   └── auth.php
+│
+├── modules/
+│   ├── libros/
+│   │   ├── crear.php
+│   │   ├── editar.php
+│   │   ├── eliminar.php
+│   │   └── listar.php
+│   │
+│   ├── usuarios/
+│   │   ├── crear.php
+│   │   ├── editar.php
+│   │   └── listar.php
+│   │
+│   └── prestamos/
+│       ├── crear.php
+│       ├── devolver.php
+│       └── listar.php
+│
+├── public/
+│   ├── index.php
+│   ├── login.php
+│   └── registro.php
+│
+├── uploads/
+│   └── portadas/
+│
+└── README.md
+
+
+Mapa de etapas (sprints)
+🔐 Base del proyecto + estructura + autenticación (login/registro + roles)
+📚 CRUD de libros (panel admin)
+🔎 Catálogo público de libros + búsqueda
+🔁 Sistema de préstamos (relaciones entre usuarios y libros)
+👤 Panel de usuario (historial de préstamos)
+🛡️ Seguridad, validaciones y control de permisos
+🎨 Mejora UI/UX (responsive + limpieza visual)
+🚀 Preparación de deploy + puesta en producción

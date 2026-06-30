@@ -1,0 +1,32 @@
+# Entorno
+.env
+.env.local
+
+# Composer
+/vendor/
+composer.lock
+
+# IDE y editores
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Logs
+*.log
+/ logs/
+
+# Uploads (imagenes de portadas, etc.)
+/uploads/
+
+# Archivos de base de datos (no subir si son de tu maquina local)
+*.sql
+
+# Node (si usas npm para frontend)
+/node_modules/
