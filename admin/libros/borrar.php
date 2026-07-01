@@ -1,14 +1,14 @@
-<?php
-
-require_once __DIR__ . '/../includes/app.php';
+<?php 
+require_once __DIR__ . '/../../includes/app.php';
 
 incluirTemplate('header');
 incluirTemplate('navbar');
 ?>
 
 <main>
-    este es el contenido de la página principal
+
 </main>
+
 <?php 
 incluirTemplate('footer');
 ?>
