@@ -1,22 +1,23 @@
 <?php
 require_once __DIR__ . '/../includes/app.php';
+estaAutenticado();
 
-$db = conectarDB();
-$query = "SELECT l.*, c.nombre AS categoria_nombre 
-          FROM libros l 
-          INNER JOIN categoria c 
-          ON l.categoria_id = c.id";
-$resultadoConsulta = mysqli_query($db, $query);
+use App\Libro;
+use App\Categoria;
+
+// Implementar un metodo para obtener libros
+$libros = Libro::all();
+
+$categorias = Categoria::all();
 
 incluirTemplate('header');
 incluirTemplate('navbar');
-estaAutenticado();
 ?>
 
 <main>
 <h1>Panel de Administración</h1>
 
-<a href="./libros/crear.php">Agregar un  Libro</a>
+<a href="./libros/crear.php">Agregar un Libro</a>
 <a href="./categorias/crear.php">Agregar una Categoría</a>
 
 <h2>Panel de administracion</h2>
@@ -35,29 +36,33 @@ estaAutenticado();
             <th>Acciones</th>
         </tr>
     </thead>
-    <tbody> 
-        <!--Mostrar los resultados-->
-        <?php while($libro = mysqli_fetch_assoc($resultadoConsulta)): ?>
+    <tbody>
+        <?php foreach($libros as $libro): ?>
         <tr>
-            <td><?php echo $libro['id']; ?></td>
-            <td><?php echo $libro['titulo']; ?></td>
-            <td><?php echo $libro['autor']; ?></td>
-            <td><?php echo $libro['editorial']; ?></td>
-            <td><?php echo $libro['anio_publicacion']; ?></td>
-            <td><?php echo $libro['isbn']; ?></td>
-            <td><?php echo $libro['categoria_nombre']; ?></td> <!-- Nota sobre esto abajo -->
-            <td><?php echo $libro['stock']; ?></td>
-            <td><img src="<?php echo $libro['imagen']; ?>" alt="<?php echo $libro['titulo']; ?>" width="50"></td> <!--Hacer que la imagen funcione bien-->
+            <td><?php echo $libro->id; ?></td>
+            <td><?php echo $libro->titulo; ?></td>
+            <td><?php echo $libro->autor; ?></td>
+            <td><?php echo $libro->editorial; ?></td>
+            <td><?php echo $libro->anio_publicacion; ?></td>
+            <td><?php echo $libro->isbn; ?></td>
+            <td><?php foreach($categorias as $categoria): ?>
+                <?php if($categoria->id === $libro->categoria_id): ?>
+                    <?php echo $categoria->nombre; ?>
+                <?php endif; ?>
+            <?php endforeach; ?></td>
+            <td><?php echo $libro->stock; ?></td>
+            <td><?php echo $libro->imagen; ?></td>
+            
             <td>
-                <a href="./libros/editar.php?id=<?php echo $libro['id']; ?>">Editar</a>
-                <a href="./libros/eliminar.php?id=<?php echo $libro['id']; ?>">Eliminar</a>
+                <a href="./libros/editar.php?id=<?php echo $libro->id; ?>">Editar</a>
+                <a href="./libros/eliminar.php?id=<?php echo $libro->id; ?>">Eliminar</a>
             </td>
         </tr>
-        <?php endwhile; ?>
+        <?php endforeach;?>
     </tbody>
 </table>
 </main>
 
-<?php 
+<?php
 incluirTemplate('footer');
 ?>

@@ -1,0 +1,16 @@
+{
+    "name": "biblioflex/app",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Franco",
+            "email": "franco.star.dev@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "App\\": "models/"
+        }
+    }
+}
