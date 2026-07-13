@@ -1,0 +1,11 @@
+# Deny access to .htaccess file
+<Files .htaccess>
+    Order allow,deny
+    Deny from all
+</Files>
+
+# Deny access to PHP files inside imagenes/
+<Files "*.php">
+    Order allow,deny
+    Deny from all
+</Files>

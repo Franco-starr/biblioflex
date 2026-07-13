@@ -146,6 +146,39 @@ class ActiveRecord
         static::$errores = [];
     }
 
+    //subida de imagen
+    public function setImagen($imagen){
+
+        //solo eliminar imagen previa si se está asignando una nueva imagen
+        if( !is_null($this->id)) {
+            $this->borrarImagen();
+        } 
+
+        //asignar el nombre de la imagen
+        if($imagen){
+            $this->imagen = $imagen;
+        }
+    }
+
+    // Elimina la imagen previa del disco
+    public function borrarImagen() {
+        if(isset($this->imagen) && $this->imagen) {
+            $rutaImagen = __DIR__ . '/../imagenes/' . $this->imagen;
+            if(file_exists($rutaImagen)) {
+                unlink($rutaImagen);
+            }
+        }
+    }
+
+     //sincroniza el objeto en memoria con los cambios realizados por el usuario
+    public function sincronizar($args = []) {
+        foreach($args as $key => $value){
+            if(property_exists($this, $key) && !is_null($value)){
+                $this->$key = $value;
+            }
+        }
+    }
+
     
 
 }

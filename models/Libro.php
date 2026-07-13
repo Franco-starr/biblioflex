@@ -26,7 +26,7 @@ class Libro extends ActiveRecord {
         $this->titulo = $args['titulo'] ?? '';
         $this->autor = $args['autor'] ?? '';
         $this->editorial = $args['editorial'] ?? '';
-        $this->anio_publicacion = $args['anio_publicacion'] ?? '';
+        $this->anio_publicacion = $args['anio_publicacion'] ?? date('Y');
         $this->isbn = $args['isbn'] ?? '';
         $this->categoria_id = $args['categoria_id'] ?? null;
         $this->stock = $args['stock'] ?? 0;
@@ -48,5 +48,6 @@ class Libro extends ActiveRecord {
         
         return static::$errores;
     }
+
 }
 ?>
