@@ -55,7 +55,11 @@ incluirTemplate('navbar');
             
             <td>
                 <a href="./libros/editar.php?id=<?php echo $libro->id; ?>">Editar</a>
-                <a href="./libros/eliminar.php?id=<?php echo $libro->id; ?>">Eliminar</a>
+                <form method="POST" class="w-100">
+                    <input type="hidden" name="id" value="<?php echo $libro->id; ?>">
+                    <input type="hidden" name="tipo" value="libro">
+                    <input type="submit" class="boton-rojo-block" value="Eliminar">
+                </form>
             </td>
         </tr>
         <?php endforeach;?>
