@@ -29,3 +29,9 @@ function s($html) : string {
     $s = htmlspecialchars($html);
     return $s;
 }
+
+//validar tipo de contenido
+function validarTipoContenido($tipo) {
+    $tipos = ['libro', 'categoria'];
+    return in_array($tipo, $tipos);
+}
