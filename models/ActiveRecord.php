@@ -40,6 +40,13 @@ class ActiveRecord
         return array_shift($resultado);
     }
 
+    // Busca registros por una condición
+    public static function where($columna, $valor) {
+        $valor_sanitizado = self::$db->escape_string($valor);
+        $query = "SELECT * FROM " . static::$tabla . " WHERE {$columna} = '{$valor_sanitizado}'";
+        return self::consultarSQL($query);
+    }
+
     // Ejecutar la consulta SQL y construir los objetos
     protected static function consultarSQL($query) {
         $resultado = self::$db->query($query);

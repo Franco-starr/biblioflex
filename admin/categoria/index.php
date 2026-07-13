@@ -3,6 +3,7 @@ require_once __DIR__ . '/../../includes/app.php';
 estaAutenticado();
 
 use App\Categoria;
+use App\Libro;
 
 $categorias = Categoria::all();
 
@@ -18,6 +19,18 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
             if($tipo === 'categoria') {
                 $categoria = Categoria::find($id);
+
+                $sinCategoria = Categoria::where('nombre', 'Sin categoria');
+                $sinCategoria = $sinCategoria[0] ?? null;
+
+                if($sinCategoria && $categoria->id !== $sinCategoria->id) {
+                    $libros = Libro::where('categoria_id', $id);
+                    foreach($libros as $libro) {
+                        $libro->categoria_id = $sinCategoria->id;
+                        $libro->guardar();
+                    }
+                }
+
                 $categoria->eliminar();
                 header('location: ./index.php?resultado=3');
                 exit;
