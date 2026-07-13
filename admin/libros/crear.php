@@ -41,7 +41,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     if(empty($errores)) {
         $resultado = $libro->guardar();
         if($resultado) {
-            header('Location: /admin/index.php');
+            header('Location: ./index.php?resultado=1');
             exit;
         }
     }

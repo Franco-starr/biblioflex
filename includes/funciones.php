@@ -35,3 +35,24 @@ function validarTipoContenido($tipo) {
     $tipos = ['libro', 'categoria'];
     return in_array($tipo, $tipos);
 }
+
+//mostrar mensajes 
+function mostrarNotificacion($codigo) {
+    $mensaje = '';
+
+    switch($codigo) {
+        case 1:
+            $mensaje = 'Creado correctamente';
+            break;
+        case 2:
+            $mensaje = 'Actualizado correctamente';
+            break;
+        case 3:
+            $mensaje = 'Eliminado correctamente';
+            break;
+        default:
+            $mensaje = false;
+    }
+
+    return $mensaje;
+}

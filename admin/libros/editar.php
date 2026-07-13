@@ -11,14 +11,11 @@ $id = $_GET['id'];
 $id = filter_var($id, FILTER_VALIDATE_INT);
 
 if (!$id) {
-    header('LOCATION: /admin/index.php');
+    header('LOCATION: ./index.php');
     exit;
 }
 
-if(!$libro){
-    header('Location: /admin/index.php');
-    exit;
-}
+
 
 $libro = Libro::find($id);
 $categorias = Categoria::all();
@@ -50,7 +47,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     if(empty($errores)) {
         $resultado = $libro->guardar();
         if($resultado) {
-            header('Location: /admin/index.php?resultado=2');
+            header('Location: ./index.php?resultado=2');
             exit;
         }
     }
@@ -62,7 +59,7 @@ incluirTemplate('header');
 <main>
     <h1>Actualizar Libro</h1>
 
-    <a href="/admin/index.php">Volver</a>
+    <a href="./index.php">Volver</a>
 
     <?php if(!empty($errores)) : ?>
         <div class="errores">

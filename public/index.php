@@ -7,7 +7,7 @@ incluirTemplate('navbar');
 ?>
 
 <main>
-    este es el contenido de la página principal
+   
 </main>
 <?php 
 incluirTemplate('footer');
