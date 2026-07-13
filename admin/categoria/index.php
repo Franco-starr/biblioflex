@@ -34,6 +34,9 @@ incluirTemplate('navbar');
 <main>
 <h1>Categorías</h1>
 
+<a href="/admin/index.php">Volver</a>
+
+
 <?php
     $mensaje = mostrarNotificacion( intval($resultado) );
     if($mensaje) { ?>
@@ -48,7 +51,6 @@ incluirTemplate('navbar');
         <tr>
             <th>ID</th>
             <th>Nombre</th>
-            <th>Estado</th>
             <th>Creado</th>
             <th>Acciones</th>
         </tr>
@@ -58,7 +60,6 @@ incluirTemplate('navbar');
         <tr>
             <td><?php echo $categoria->id; ?></td>
             <td><?php echo s($categoria->nombre); ?></td>
-            <td><?php echo $categoria->estado == 1 ? 'Activo' : 'Inactivo'; ?></td>
             <td><?php echo $categoria->creado_ed; ?></td>
             <td>
                 <a href="./editar.php?id=<?php echo $categoria->id; ?>">Editar</a>

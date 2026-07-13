@@ -46,6 +46,8 @@ incluirTemplate('navbar');
     <p class="alerta exito"><?php echo s($mensaje); ?></p>
 <?php } ?>
 
+<a href="/admin/index.php">Volver</a>
+
 <a href="./crear.php">Agregar un Libro</a>
 <a href="./categorias/crear.php">Agregar una Categoría</a>
 
