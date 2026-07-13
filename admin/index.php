@@ -51,8 +51,7 @@ incluirTemplate('navbar');
                 <?php endif; ?>
             <?php endforeach; ?></td>
             <td><?php echo $libro->stock; ?></td>
-            <td><?php echo $libro->imagen; ?></td>
-            
+            <td> <img src="/imagenes/<?php echo $libro->imagen; ?>" alt="Imagen del libro" width="100"> </td>
             <td>
                 <a href="./libros/editar.php?id=<?php echo $libro->id; ?>">Editar</a>
                 <form method="POST" class="w-100">
