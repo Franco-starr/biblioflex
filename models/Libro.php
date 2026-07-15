@@ -19,6 +19,7 @@ class Libro extends ActiveRecord {
     public $imagen;
     public $estado;
     public $creado_en;
+    public $categoria_nombre;
 
     // 3. El constructor (recibe los datos del formulario $_POST)
     public function __construct($args = []) {
@@ -47,6 +48,18 @@ class Libro extends ActiveRecord {
         if($this->stock === '') { static::$errores[] = "El stock no puede estar vacío."; }
         
         return static::$errores;
+    }
+
+    public static function allConCategoria() {
+        $query = "SELECT libros.*, categoria.nombre as categoria_nombre 
+                  FROM libros 
+                  INNER JOIN categoria ON libros.categoria_id = categoria.id";
+        return self::consultarSQL($query);
+    }
+
+    public function eliminar() {
+        $this->borrarImagen();
+        return parent::eliminar();
     }
 
 }

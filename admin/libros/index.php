@@ -3,12 +3,8 @@ require_once __DIR__ . '/../../includes/app.php';
 estaAutenticado();
 
 use App\Libro;
-use App\Categoria;
 
-// Implementar un metodo para obtener libros
-$libros = Libro::all();
-
-$categorias = Categoria::all();
+$libros = Libro::allConCategoria();
 
 // Muestra mensaje condicional
 $resultado = $_GET['resultado'] ?? null; 
@@ -23,7 +19,6 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
                
             if($tipo === 'libro') {
                 $libro = Libro::find($id);
-                $libro->borrarImagen();
                 $libro->eliminar();
                 header('location: ./index.php?resultado=3');
                 exit;
@@ -76,11 +71,7 @@ incluirTemplate('navbar');
             <td><?php echo $libro->editorial; ?></td>
             <td><?php echo $libro->anio_publicacion; ?></td>
             <td><?php echo $libro->isbn; ?></td>
-            <td><?php foreach($categorias as $categoria): ?>
-                <?php if($categoria->id === $libro->categoria_id): ?>
-                    <?php echo $categoria->nombre; ?>
-                <?php endif; ?>
-            <?php endforeach; ?></td>
+            <td><?php echo $libro->categoria_nombre; ?></td>
             <td><?php echo $libro->stock; ?></td>
             <td> <img src="/imagenes/<?php echo $libro->imagen; ?>" alt="Imagen del libro" width="100"> </td>
             <td>
