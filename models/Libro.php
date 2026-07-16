@@ -62,5 +62,18 @@ class Libro extends ActiveRecord {
         return parent::eliminar();
     }
 
+    public static function findConCategoria($id) {
+        $id = filter_var($id, FILTER_VALIDATE_INT);
+
+        $query = "SELECT l.*, c.nombre AS categoria_nombre 
+        FROM " . static::$tabla . " l 
+        INNER JOIN categoria c ON l.categoria_id = c.id 
+        WHERE l.id = {$id}";
+
+        $resultado = self::consultarSQL($query);
+        // Devolvemos solo el primer elemento si existe
+        return array_shift($resultado);
+    }
+
 }
 ?>
