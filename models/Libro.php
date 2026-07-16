@@ -75,5 +75,20 @@ class Libro extends ActiveRecord {
         return array_shift($resultado);
     }
 
+    public static function buscar($termino) {
+        //sanitizar el término de búsqueda
+        $termino_sanitizado = self::$db->escape_string($termino);
+        $like = "%{$termino_sanitizado}%";
+
+        //consulta sql
+        $query = "SELECT l.*, c.nombre AS categoria_nombre
+        FROM " . static::$tabla . " l
+        INNER JOIN categoria c ON l.categoria_id = c.id
+        WHERE l.titulo LIKE '{$like}' OR l.autor LIKE '{$like}' OR c.nombre LIKE '{$like}'";
+
+        //retornar resultado
+        return self::consultarSQL($query);
+    }
+
 }
 ?>
