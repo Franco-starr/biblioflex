@@ -11,6 +11,8 @@ if (!$id) header('Location: ./index.php');
 $libro = Libro::findConCategoria($id);
 if (!$libro) header('Location: ./index.php');
 
+
+
 incluirTemplate('header');
 incluirTemplate('navbar');
 
@@ -21,13 +23,13 @@ incluirTemplate('navbar');
 <h1> <?php echo s($libro->titulo); ?></h1>
 
 <div class="contenido-libro">
-    <img src="/imagenes/<?php echo $libro->imagen; ?>" alt="Imagen de <?php echo $libro->titulo; ?>">
+    <img src="/imagenes/<?php echo s($libro->imagen); ?>" alt="Imagen de <?php echo s($libro->titulo); ?>">
 
     <div class="informacion">
-        <p class="autor">Autor: <?php echo $libro->autor; ?></p>
-        <p class="categoria">Categoría: <span><?php echo $libro->categoria_nombre; ?></span></p>
-        <p class="editorial">Editorial: <?php echo $libro->editorial; ?></p>
-        <p class="descripcion"><?php echo $libro->estado; ?></p>
+        <p class="autor">Autor: <?php echo s($libro->autor); ?></p>
+        <p class="categoria">Categoría: <span><?php echo s($libro->categoria_nombre); ?></span></p>
+        <p class="editorial">Editorial: <?php echo s($libro->editorial); ?></p>
+        <p class="descripcion"><?php echo s($libro->estado); ?></p>
     </div>
 </div>
 

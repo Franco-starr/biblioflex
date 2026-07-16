@@ -3,14 +3,23 @@
 require_once __DIR__ . '/../includes/app.php';
 
 use App\Libro;
+use App\Categoria;
+
 
 $termino = $_GET['busqueda'] ?? '';
+$categoria_id = $_GET['categoria_id'] ?? '';
 
 if ($termino) {
     $libros = Libro::buscar($termino);
-} else {
+} elseif (!empty($categoria_id)) {
+    $libros = Libro::filtrarPorCategoria($categoria_id);
+}
+else {
     $libros = Libro::allConCategoria();
 }
+
+// Necesitas traer las categorías para llenar el <select>
+$categorias = Categoria::all();
 
 incluirTemplate('header');
 incluirTemplate('navbar');
@@ -21,9 +30,24 @@ incluirTemplate('navbar');
     <h1>Lista de Nuestros Libros</h1>
 
     <form method="GET">
-        <label for="busqueda">Buscar libro:</label>
-        <input type="text" placeholder="Buscar libro" name="busqueda" id="busqueda" value="<?php echo s($termino); ?>">
-        <button type="submit">Buscar</button>
+        <label for="busqueda">Buscar:</label>
+        <input type="text" name="busqueda" value="<?php echo s($termino); ?>">
+
+        <label for="categoria_id">Categoría:</label>
+        <select name="categoria_id">
+            <option value="">-- Todas las categorías --</option>
+            <?php foreach($categorias as $categoria): ?>
+                <option 
+                    value="<?php echo s($categoria->id); ?>"
+                    <?php echo $categoria_id == $categoria->id ? 'selected' : ''; ?>
+                >
+                    <?php echo s($categoria->nombre); ?>
+                </option>
+            <?php endforeach; ?>
+        </select>
+
+        <button type="submit">Filtrar</button>
+        <a href="index.php">Limpiar</a>
     </form>
     
 

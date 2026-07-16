@@ -90,5 +90,17 @@ class Libro extends ActiveRecord {
         return self::consultarSQL($query);
     }
 
+    public static function filtrarPorCategoria($categoria_id) {
+        //Sanitizar el id de la categoria
+        $categoria_id = self::$db->escape_string($categoria_id);
+
+        //consultar con join filtrando categorias 
+        $query = "SELECT l.*, c.nombre AS categoria_nombre
+        FROM " . static::$tabla . " l 
+        INNER JOIN categoria c ON l.categoria_id = c.id
+        WHERE l.categoria_id = {$categoria_id}";
+
+        return self::consultarSQL($query);
+    }
+
 }
-?>
