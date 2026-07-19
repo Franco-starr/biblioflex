@@ -26,6 +26,7 @@ function estaLogueado() {
 
 //escapar el HTML
 function s($html) : string {
+    if(is_null($html)) return '';
     $s = htmlspecialchars($html);
     return $s;
 }
@@ -55,4 +56,11 @@ function mostrarNotificacion($codigo) {
     }
 
     return $mensaje;
+}
+
+function debuguear($variable) {
+    echo '<pre>';
+    var_dump($variable);
+    echo '</pre>';
+    exit;
 }

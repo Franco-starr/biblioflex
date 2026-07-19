@@ -90,7 +90,7 @@ class ActiveRecord
         $atributos = $this->atributos();
         $sanitizado = [];
         foreach($atributos as $key => $value){
-            $sanitizado[$key] = self::$db->escape_string($value);
+            $sanitizado[$key] = is_null($value) ? null : self::$db->escape_string($value);
         }
         return $sanitizado;
     }
@@ -113,9 +113,12 @@ class ActiveRecord
 
         $query = "INSERT INTO " . static::$tabla . " (";
         $query .= join(', ', array_keys($atributos));
-        $query .= ") VALUES ('";
-        $query .= join("', '", array_values($atributos));
-        $query .= "')";
+        $query .= ") VALUES (";
+        $valores = array_map(function($v) {
+            return is_null($v) ? 'NULL' : "'" . $v . "'";
+        }, array_values($atributos));
+        $query .= join(', ', $valores);
+        $query .= ")";
 
         $resultado = self::$db->query($query);
 
@@ -127,7 +130,7 @@ class ActiveRecord
         $atributos = $this->sanitizarAtributos();
         $valores = [];
         foreach($atributos as $key => $value) {
-            $valores[] = "{$key}='{$value}'";
+            $valores[] = is_null($value) ? "{$key}=NULL" : "{$key}='{$value}'";
         }
         $query = "UPDATE " . static::$tabla . " SET ";
         $query .= join(', ', $valores);

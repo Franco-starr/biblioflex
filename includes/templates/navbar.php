@@ -9,6 +9,7 @@
                 <li><a href="../admin/index.php">Administracion</a></li>
             <?php endif; ?>
 
+            <li><a href="../public/prestamos/index.php">Mis Préstamos</a></li>
             <li><a href="./logout.php">Cerrar sesion</a></li>
         <?php else : ?>
             <li><a href="./login.php">Iniciar sesion</a></li>

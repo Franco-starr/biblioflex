@@ -25,6 +25,7 @@ if ( $_SERVER['REQUEST_METHOD'] === 'POST' ){
         if($resultado->num_rows) {
             $usuarioDB = mysqli_fetch_assoc($resultado);
             if(password_verify($password, $usuarioDB['password'])) {
+                $_SESSION['usuario_id'] = $usuarioDB['id'];
                 $_SESSION['usuario'] = $usuarioDB['usuario'];
                 $_SESSION['login'] = true;
                 $_SESSION['permiso'] = $usuarioDB['nombre_permiso'];
