@@ -17,6 +17,8 @@ class Prestamo extends ActiveRecord {
     public $titulo;
     public $imagen;
     public $autor;
+    public $nombre;
+    public $apellido;
 
 
     public function __construct($args = []) 
@@ -99,6 +101,55 @@ class Prestamo extends ActiveRecord {
                   WHERE prestamo.usuario_id = {$usuario_id}
                   ORDER BY prestamo.fecha_prestamo DESC";
         return self::consultarSQL($query);
+    }
+
+    public static function allConDetalle() {
+        $query = "SELECT prestamo.*, libros.titulo, libros.imagen,
+                         usuario.nombre, usuario.apellido
+                  FROM prestamo
+                  INNER JOIN libros ON prestamo.libro_id = libros.id
+                  INNER JOIN usuario ON prestamo.usuario_id = usuario.id
+                  ORDER BY prestamo.fecha_prestamo DESC";
+        return self::consultarSQL($query);
+    }
+
+    public function devolverLibro() {
+        if($this->estado !== 'prestado') {
+            static::$errores[] = "Este préstamo ya fue devuelto.";
+            return false;
+        }
+
+        $libro = Libro::find($this->libro_id);
+        if(!$libro) {
+            static::$errores[] = "No se encontró el libro asociado.";
+            return false;
+        }
+
+        self::$db->begin_transaction();
+
+        try {
+            $this->fecha_devolucion = date('Y-m-d H:i:s');
+            $this->estado = 'devuelto';
+
+            $resultado = $this->guardar();
+            if(!$resultado) {
+                throw new Exception("Error al actualizar el préstamo.");
+            }
+
+            $libro->stock = $libro->stock + 1;
+            $resultadoStock = $libro->guardar();
+            if(!$resultadoStock) {
+                throw new Exception("Error al actualizar el stock.");
+            }
+
+            self::$db->commit();
+            return true;
+
+        } catch(Exception $e) {
+            self::$db->rollback();
+            static::$errores[] = $e->getMessage();
+            return false;
+        }
     }
 
 

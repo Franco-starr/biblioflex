@@ -51,6 +51,9 @@ function mostrarNotificacion($codigo) {
         case 3:
             $mensaje = 'Eliminado correctamente';
             break;
+        case 4:
+            $mensaje = 'Libro devuelto correctamente';
+            break;
         default:
             $mensaje = false;
     }

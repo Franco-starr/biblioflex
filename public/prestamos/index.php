@@ -34,10 +34,9 @@ incluirTemplate('navbar');
                 <tr>
                     <td>
                         <img src="/imagenes/<?php echo s($prestamo->imagen); ?>" alt="<?php echo s($prestamo->titulo); ?>" width="50">
+                        <?php echo s($prestamo->titulo); ?>
                     </td>
-                    <td><?php echo s($prestamo->titulo); ?></td>
                     <td><?php echo s($prestamo->fecha_prestamo); ?></td>
-                    <td></td>
                     <td><?php echo s($prestamo->fecha_estimada); ?></td>
                     <td><?php echo $prestamo->fecha_devolucion ? s($prestamo->fecha_devolucion) : '-'; ?></td>
                     <td><?php echo s($prestamo->estado); ?></td>
