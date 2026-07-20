@@ -27,7 +27,7 @@ function estaLogueado() {
 //escapar el HTML
 function s($html) : string {
     if(is_null($html)) return '';
-    $s = htmlspecialchars($html);
+    $s = htmlspecialchars($html, ENT_QUOTES, 'UTF-8');
     return $s;
 }
 

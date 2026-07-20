@@ -46,12 +46,12 @@ incluirTemplate('navbar');
     <?php if(!empty($errores)) : ?>
         <div class="errores">
             <?php foreach($errores as $error) : ?>
-                <p><?php echo $error; ?></p>
+                <p><?php echo s($error); ?></p>
             <?php endforeach; ?>
         </div>
     <?php endif; ?>
 
-    <form class="formulario" method="POST" action="./editar.php?id=<?php echo $id; ?>">
+    <form class="formulario" method="POST" action="./editar.php?id=<?php echo s($id); ?>">
         <?php include '../../includes/templates/formulario_categoria.php'; ?>
         <input type="submit" value="Actualizar Categoría" class="boton boton-verde">
     </form>

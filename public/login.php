@@ -59,6 +59,10 @@ if ( $_SERVER['REQUEST_METHOD'] === 'POST' ){
 
     <h1>Inicia Sesion</h1>
 
+    <?php foreach ($errores as $error) : ?>
+        <p><?php echo s($error); ?></p>
+    <?php endforeach; ?>
+
     <form  method="POST">
 
         <fieldset>

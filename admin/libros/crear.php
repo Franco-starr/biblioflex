@@ -64,7 +64,7 @@ incluirTemplate('navbar');
     <?php if(!empty($errores)) : ?>
         <div class="errores">
             <?php foreach($errores as $error) : ?>
-                <p><?php echo $error; ?></p>
+                <p><?php echo s($error); ?></p>
             <?php endforeach; ?>
         </div>
     <?php endif; ?>

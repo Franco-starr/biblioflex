@@ -75,13 +75,13 @@ incluirTemplate('navbar');
     <tbody>
         <?php foreach($categorias as $categoria): ?>
         <tr>
-            <td><?php echo $categoria->id; ?></td>
+            <td><?php echo s($categoria->id); ?></td>
             <td><?php echo s($categoria->nombre); ?></td>
-            <td><?php echo $categoria->creado_ed; ?></td>
+            <td><?php echo s($categoria->creado_ed); ?></td>
             <td>
-                <a href="./editar.php?id=<?php echo $categoria->id; ?>">Editar</a>
+                <a href="./editar.php?id=<?php echo s($categoria->id); ?>">Editar</a>
                 <form method="POST" class="w-100">
-                    <input type="hidden" name="id" value="<?php echo $categoria->id; ?>">
+                    <input type="hidden" name="id" value="<?php echo s($categoria->id); ?>">
                     <input type="hidden" name="tipo" value="categoria">
                     <input type="submit" class="boton-rojo-block" value="Eliminar">
                 </form>

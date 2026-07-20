@@ -56,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <h1>Crear Cuenta</h1>
 
     <?php foreach ($errores as $error) : ?>
-        <p><?php echo $error; ?></p>
+        <p><?php echo s($error); ?></p>
     <?php endforeach; ?>
 
     <form method="POST">

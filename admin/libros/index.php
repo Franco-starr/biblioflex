@@ -69,19 +69,19 @@ incluirTemplate('navbar');
     <tbody>
         <?php foreach($libros as $libro): ?>
         <tr>
-            <td><?php echo $libro->id; ?></td>
-            <td><?php echo $libro->titulo; ?></td>
-            <td><?php echo $libro->autor; ?></td>
-            <td><?php echo $libro->editorial; ?></td>
-            <td><?php echo $libro->anio_publicacion; ?></td>
-            <td><?php echo $libro->isbn; ?></td>
-            <td><?php echo $libro->categoria_nombre; ?></td>
-            <td><?php echo $libro->stock; ?></td>
-            <td> <img src="/imagenes/<?php echo $libro->imagen; ?>" alt="Imagen del libro" width="100"> </td>
+            <td><?php echo s($libro->id); ?></td>
+            <td><?php echo s($libro->titulo); ?></td>
+            <td><?php echo s($libro->autor); ?></td>
+            <td><?php echo s($libro->editorial); ?></td>
+            <td><?php echo s($libro->anio_publicacion); ?></td>
+            <td><?php echo s($libro->isbn); ?></td>
+            <td><?php echo s($libro->categoria_nombre); ?></td>
+            <td><?php echo s($libro->stock); ?></td>
+            <td> <img src="/imagenes/<?php echo s($libro->imagen); ?>" alt="Imagen del libro" width="100"> </td>
             <td>
-                <a href="./editar.php?id=<?php echo $libro->id; ?>">Editar</a>
+                <a href="./editar.php?id=<?php echo s($libro->id); ?>">Editar</a>
                 <form method="POST" class="w-100">
-                    <input type="hidden" name="id" value="<?php echo $libro->id; ?>">
+                    <input type="hidden" name="id" value="<?php echo s($libro->id); ?>">
                     <input type="hidden" name="tipo" value="libro">
                     <input type="submit" class="boton-rojo-block" value="Eliminar">
                 </form>

@@ -69,12 +69,12 @@ incluirTemplate('header');
     <?php if(!empty($errores)) : ?>
         <div class="errores">
             <?php foreach($errores as $error) : ?>
-                <p><?php echo $error; ?></p>
+                <p><?php echo s($error); ?></p>
             <?php endforeach; ?>
         </div>
     <?php endif; ?>
 
-    <form class="formulario" method="POST" action="/admin/libros/editar.php?id=<?php echo $id; ?>" enctype="multipart/form-data">
+    <form class="formulario" method="POST" action="/admin/libros/editar.php?id=<?php echo s($id); ?>" enctype="multipart/form-data">
        <?php include '../../includes/templates/formulario_libro.php'; ?>
     
         <input type="submit" value="Actualizar Libro" class="boton boton-verde">
