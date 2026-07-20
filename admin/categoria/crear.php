@@ -1,6 +1,10 @@
 <?php
 require_once __DIR__ . '/../../includes/app.php';
 estaAutenticado();
+if (!esAdmin()) {
+    header('Location: /public/index.php'); 
+    exit;
+}
 
 use App\Categoria;
 

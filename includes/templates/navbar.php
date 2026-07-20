@@ -2,7 +2,7 @@
     <h1>Biblioflex</h1>
 
     <ul>
-        <li><a href="../public/index.php">Inicio</a></li>
+        <li><a href="/public/index.php">Inicio</a></li>
 
         <?php if(estaLogueado()) : ?>
             <?php if(esAdmin()) : ?>
