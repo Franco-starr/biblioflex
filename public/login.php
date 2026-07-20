@@ -16,15 +16,19 @@ if ( $_SERVER['REQUEST_METHOD'] === 'POST' ){
         $errores[] = 'El password es obligatorio';
     } 
     if( empty($errores) ) {
-        $query = " SELECT usuario.*, permisos.nombre_permiso
-                   FROM usuario
-                   INNER JOIN permisos ON usuario.permiso = permisos.id
-                   WHERE usuario.usuario = '$usuario' ";
-        $resultado = mysqli_query($db, $query);
+        $query = "SELECT usuario.*, permisos.nombre_permiso
+          FROM usuario
+          INNER JOIN permisos ON usuario.permiso = permisos.id
+          WHERE usuario.usuario = ?";
+        $stmt = $db->prepare($query);
+        $stmt->bind_param("s", $usuario);
+        $stmt->execute();
+        $resultado = $stmt->get_result();
 
         if($resultado->num_rows) {
             $usuarioDB = mysqli_fetch_assoc($resultado);
             if(password_verify($password, $usuarioDB['password'])) {
+                session_regenerate_id(true);
                 $_SESSION['usuario_id'] = $usuarioDB['id'];
                 $_SESSION['usuario'] = $usuarioDB['usuario'];
                 $_SESSION['login'] = true;
@@ -33,14 +37,16 @@ if ( $_SERVER['REQUEST_METHOD'] === 'POST' ){
                 header('Location: ./index.php');
                 exit;
             } else {
-                $errores[] = 'Password incorrecto';
+                $errores[] = 'Credenciales incorrectas';
             }
         } else {
-            $errores[] = 'El usuario no existe';
+            $errores[] = 'Credenciales incorrectas';
         }
     }
     
 }
+
+
 
    
 
