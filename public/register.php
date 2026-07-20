@@ -7,11 +7,11 @@ $errores = [];
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $db = conectarDB();
 
-    $nombre = $_POST['nombre'];
-    $apellido = $_POST['apellido'];
-    $usuario = $_POST['usuario'];
-    $password = $_POST['password'];
-    $confirmar = $_POST['confirmar_password'];
+    $nombre = trim($_POST['nombre']);
+    $apellido = trim($_POST['apellido']);
+    $usuario = trim($_POST['usuario']);
+    $password = trim($_POST['password']);
+    $confirmar = trim($_POST['confirmar_password']);
 
     // Validaciones
     if (!$nombre) $errores[] = 'El nombre es obligatorio';
@@ -23,18 +23,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
 
     // Verificar usuario duplicado
-    $query = "SELECT id FROM usuario WHERE usuario = '$usuario'";
-    $resultado = mysqli_query($db, $query);
+    $stmt = $db->prepare("SELECT id FROM usuario WHERE usuario = ?");
+    $stmt->bind_param("s", $usuario);
+    $stmt->execute();
+    $resultado = $stmt->get_result();
     if ($resultado->num_rows > 0) {
         $errores[] = 'El usuario ya existe';
     }
 
     if (empty($errores)) {
         //password hash?
-        $contrasenaHash = password_hash($password, PASSWORD_BCRYPT);
+        
         $query = "INSERT INTO usuario (nombre, apellido, usuario, password, permiso)
-                  VALUES ('$nombre', '$apellido', '$usuario', '$contrasenaHash', 2)";
-        $resultado = mysqli_query($db, $query);
+                VALUES (?, ?, ?, ?, 2)";
+        // 2. Preparar el statement
+        $stmt = $db->prepare($query);
+        $contrasenaHash = password_hash($password, PASSWORD_BCRYPT);
+        $stmt->bind_param("ssss", $nombre, $apellido, $usuario, $contrasenaHash); // 4. Vincular los parámetros (s = string)
+        $resultado = $stmt->execute(); //ejecutar consultar
 
         if ($resultado) {
             header('Location: ./login.php');
