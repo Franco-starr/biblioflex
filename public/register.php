@@ -52,42 +52,65 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <?php incluirTemplate('header'); ?>
 
-<main>
-    <h1>Crear Cuenta</h1>
+<main class="main-content">
+    <div class="contenedor-centrado">
 
-    <?php foreach ($errores as $error) : ?>
-        <p><?php echo s($error); ?></p>
-    <?php endforeach; ?>
+        <div class="register-card">
+            <div class="register-header">
+                <span class="register-icono">📝</span>
+                <h1>Crear Cuenta</h1>
+                <p class="register-subtitulo">Registrate en Biblioflex</p>
+            </div>
 
-    <form method="POST">
-        <fieldset>
-            <legend>Datos personales</legend>
+            <?php if (!empty($errores)) : ?>
+                <div class="errores">
+                    <?php foreach ($errores as $error) : ?>
+                        <p><?php echo s($error); ?></p>
+                    <?php endforeach; ?>
+                </div>
+            <?php endif; ?>
 
-            <label for="nombre">Nombre</label>
-            <input id="nombre" name="nombre" placeholder="Tu nombre"
-                   value="<?php echo s($nombre ?? '') ; ?>">
+            <form method="POST" class="formulario">
+                <div class="campo">
+                    <label for="nombre">Nombre</label>
+                    <input id="nombre" name="nombre" type="text"
+                           placeholder="Ingresá tu nombre"
+                           value="<?php echo s($nombre ?? ''); ?>">
+                </div>
 
-            <label for="apellido">Apellido</label>
-            <input id="apellido" name="apellido" placeholder="Tu apellido"
-                   value="<?php echo s($apellido ?? '') ; ?>">
+                <div class="campo">
+                    <label for="apellido">Apellido</label>
+                    <input id="apellido" name="apellido" type="text"
+                           placeholder="Ingresá tu apellido"
+                           value="<?php echo s($apellido ?? ''); ?>">
+                </div>
 
-            <label for="usuario">Usuario</label>
-            <input id="usuario" name="usuario" placeholder="Elige un nombre de usuario"
-                   value="<?php echo s($usuario ?? ''); ?>">
+                <div class="campo">
+                    <label for="usuario">Usuario</label>
+                    <input id="usuario" name="usuario" type="text"
+                           placeholder="Elegí un nombre de usuario"
+                           value="<?php echo s($usuario ?? ''); ?>">
+                </div>
 
-            <label for="password">Contraseña</label>
-            <input id="password" name="password" type="password"
-                   placeholder="Tu contraseña">
+                <div class="campo">
+                    <label for="password">Contraseña</label>
+                    <input id="password" name="password" type="password"
+                           placeholder="Ingresá tu contraseña">
+                </div>
 
-            <label for="confirmar_password">Confirmar Contraseña</label>
-            <input id="confirmar_password" name="confirmar_password" type="password"
-                   placeholder="Repite la contraseña">
+                <div class="campo">
+                    <label for="confirmar_password">Confirmar Contraseña</label>
+                    <input id="confirmar_password" name="confirmar_password" type="password"
+                           placeholder="Repetí tu contraseña">
+                </div>
 
-            <input type="submit" value="Registrarse">
-        </fieldset>
-    </form>
+                <button type="submit" class="boton-submit">Registrarse</button>
+            </form>
 
-    <p>¿Ya tenés cuenta? <a href="./login.php">Iniciá sesión</a></p>
+            <p class="link-secundario">¿Ya tenés cuenta? <a href="./login.php">Iniciá sesión</a></p>
+        </div>
+
+    </div>
 </main>
 
 <?php incluirTemplate('footer'); ?>

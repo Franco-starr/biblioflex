@@ -55,32 +55,45 @@ if ( $_SERVER['REQUEST_METHOD'] === 'POST' ){
 
 <?php incluirTemplate('header'); ?>
 
-<main>
+<main class="main-content">
+    <div class="contenedor-centrado">
 
-    <h1>Inicia Sesion</h1>
+        <div class="login-card">
+            <div class="login-header">
+                <span class="login-icono">🔑</span>
+                <h1>Iniciar Sesión</h1>
+                <p class="login-subtitulo">Accedé a tu cuenta de Biblioflex</p>
+            </div>
 
-    <?php foreach ($errores as $error) : ?>
-        <p><?php echo s($error); ?></p>
-    <?php endforeach; ?>
+            <?php if (!empty($errores)) : ?>
+                <div class="errores">
+                    <?php foreach ($errores as $error) : ?>
+                        <p><?php echo s($error); ?></p>
+                    <?php endforeach; ?>
+                </div>
+            <?php endif; ?>
 
-    <form  method="POST">
+            <form method="POST" class="formulario">
+                <div class="campo">
+                    <label for="usuario">Usuario</label>
+                    <input id="usuario" name="usuario" type="text"
+                           placeholder="Ingresá tu usuario"
+                           value="<?php echo s($usuario ?? ''); ?>">
+                </div>
 
-        <fieldset>
+                <div class="campo">
+                    <label for="password">Contraseña</label>
+                    <input id="password" name="password" type="password"
+                           placeholder="Ingresá tu contraseña">
+                </div>
 
-            <legend>usuario y password</legend>
-            
-            <label for="usuario">Usuario</label>
-            <input id="usuario" name="usuario" placeholder="Tu Email" value="<?php echo s($usuario ?? ''); ?>">
+                <button type="submit" class="boton-submit">Iniciar Sesión</button>
+            </form>
 
-                
-            <label for="password">Password</label>
-            <input id="password" name="password" type="password" placeholder="Tu password">
-        
-            <input type="submit" value="iniciar sesion" class="">
-        </fieldset>
+            <p class="link-secundario">¿No tenés cuenta? <a href="./register.php">Registrate</a></p>
+        </div>
 
-    </form>
-
+    </div>
 </main>
 
 <?php 

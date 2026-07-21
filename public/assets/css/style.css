@@ -170,6 +170,9 @@ p {
     background-color: #131314;
     color: #e3e3e3;
 }
+.footer {
+    
+}
 
 /* Contenedor central estilo chat/app moderna */
 .contenedor-centrado {
@@ -330,4 +333,261 @@ p {
     padding: 3rem;
     color: #a0a0a0;
     font-size: 1.1rem;
+}
+
+/* =========================================
+   ALERTAS / NOTIFICACIONES
+   ========================================= */
+.alerta {
+    padding: 1rem 1.25rem;
+    border-radius: 6px;
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+}
+
+.alerta p {
+    margin-bottom: 0.3rem;
+}
+
+.alerta.exito {
+    background-color: rgba(129, 199, 132, 0.15);
+    color: #81c784;
+    border-left: 4px solid #81c784;
+}
+
+.alerta.error {
+    background-color: rgba(229, 115, 115, 0.15);
+    color: #e57373;
+    border-left: 4px solid #e57373;
+}
+
+/* =========================================
+   CONTENIDO DEL LIBRO (DETALLE)
+   ========================================= */
+.contenido-libro {
+    display: flex;
+    gap: 2rem;
+    background-color: #1e1f20;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.contenido-libro img {
+    width: 300px;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 6px;
+    flex-shrink: 0;
+}
+
+.informacion {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.6rem;
+}
+
+.informacion .autor {
+    font-size: 1rem;
+    color: #e3e3e3;
+}
+
+.informacion .categoria {
+    font-size: 0.95rem;
+    color: #8ab4f8;
+}
+
+.informacion .editorial {
+    font-size: 0.95rem;
+    color: #a0a0a0;
+}
+
+.informacion .descripcion {
+    font-size: 0.95rem;
+    color: #ccc;
+    margin-top: 0.5rem;
+}
+
+/* =========================================
+   ACCIONES DEL LIBRO (PRÉSTAMO)
+   ========================================= */
+.acciones-libro {
+    background-color: #1e1f20;
+    border-radius: 8px;
+    padding: 1.5rem;
+    text-align: center;
+}
+
+.acciones-libro p {
+    color: #a0a0a0;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+.boton-prestamo {
+    padding: 0.75rem 2rem;
+    background-color: #8ab4f8;
+    color: #131314;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.boton-prestamo:hover {
+    background-color: #6a9ae8;
+}
+
+.acciones-libro .error {
+    color: #e57373;
+    font-size: 0.95rem;
+    margin-bottom: 0;
+}
+
+/* =========================================
+   FORMULARIOS (LOGIN / REGISTRO)
+   ========================================= */
+
+/* Card contenedora del formulario */
+.login-card,
+.register-card {
+    background-color: #1e1f20;
+    border-radius: 16px;
+    padding: 2.5rem;
+    max-width: 420px;
+    width: 100%;
+    margin: 0 auto;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+}
+
+/* Header del login (icono + título + subtítulo) */
+.login-header,
+.register-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.login-icono,
+.register-icono {
+    font-size: 2.5rem;
+    display: block;
+    margin-bottom: 0.75rem;
+}
+
+.login-header h1,
+.register-header h1 {
+    font-size: 1.5rem;
+    color: #fff;
+    margin-bottom: 0.4rem;
+}
+
+.login-subtitulo,
+.register-subtitulo {
+    color: #a0a0a0;
+    font-size: 0.9rem;
+    margin-bottom: 0;
+}
+
+/* Errores */
+.errores {
+    background-color: rgba(229, 115, 115, 0.15);
+    border-left: 4px solid #e57373;
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.errores p {
+    color: #e57373;
+    font-size: 0.85rem;
+    margin-bottom: 0.2rem;
+}
+
+.errores p:last-child {
+    margin-bottom: 0;
+}
+
+/* Formulario */
+.formulario {
+    width: 100%;
+}
+
+/* Campo (label + input) */
+.campo {
+    margin-bottom: 1.25rem;
+}
+
+.campo label {
+    display: block;
+    font-size: 0.85rem;
+    color: #a0a0a0;
+    margin-bottom: 0.4rem;
+    font-weight: 500;
+}
+
+.campo input[type="text"],
+.campo input[type="password"],
+.campo input[type="email"] {
+    width: 100%;
+    padding: 0.7rem 1rem;
+    border: 1px solid #333;
+    border-radius: 10px;
+    background-color: #2a2a2d;
+    color: #e3e3e3;
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.campo input:focus {
+    border-color: #8ab4f8;
+    box-shadow: 0 0 0 3px rgba(138, 180, 248, 0.15);
+}
+
+.campo input::placeholder {
+    color: #555;
+}
+
+/* Botón submit */
+.boton-submit {
+    width: 100%;
+    margin-top: 0.5rem;
+    padding: 0.75rem;
+    background-color: #8ab4f8;
+    color: #131314;
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.boton-submit:hover {
+    background-color: #6a9ae8;
+}
+
+.boton-submit:active {
+    transform: scale(0.98);
+}
+
+/* Link secundario */
+.link-secundario {
+    text-align: center;
+    margin-top: 1.5rem;
+    color: #a0a0a0;
+    font-size: 0.9rem;
+}
+
+.link-secundario a {
+    color: #8ab4f8;
+    font-weight: 600;
+    transition: color 0.2s;
+}
+
+.link-secundario a:hover {
+    color: #6a9ae8;
 }
