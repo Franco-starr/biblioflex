@@ -10,7 +10,6 @@ if (!estaLogueado()) {
 $prestamos = Prestamo::prestamosPorUsuario($_SESSION['usuario_id']);
 
 incluirTemplate('header');
-incluirTemplate('navbar');
 ?>
 
 <main class="main-content">

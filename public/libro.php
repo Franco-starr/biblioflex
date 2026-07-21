@@ -14,7 +14,6 @@ if (!$libro) header('Location: ./index.php');
 
 
 incluirTemplate('header');
-incluirTemplate('navbar');
 
 ?>
 

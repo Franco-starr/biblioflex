@@ -4,6 +4,13 @@
     box-sizing: border-box;
 }
 
+CSS
+/* Asegurar que el html y body ocupen toda la pantalla y tengan el fondo oscuro */
+html, body {
+    height: 100%;
+    /*background-color: #131314;*/
+}
+
 body {
     font-family: Arial, sans-serif;;
 }
@@ -159,6 +166,168 @@ p {
     margin-left: 72px; /* Coincide con el ancho colapsado de la sidebar */
     flex: 1;
     padding: 2rem;
+    min-height: 100vh;
     background-color: #131314;
     color: #e3e3e3;
+}
+
+/* Contenedor central estilo chat/app moderna */
+.contenedor-centrado {
+    max-width: 1000px; /* Ajusta este valor según qué tan ancho lo prefieras */
+    margin: 0 auto;    /* Centra automáticamente el contenido horizontalmente */
+    width: 100%;       /* Asegura que sea responsivo en pantallas chicas */
+}
+
+/* =========================================
+   BÚSQUEDA / FILTROS
+   ========================================= */
+.busqueda {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: flex-end;
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background-color: #1e1f20;
+    border-radius: 8px;
+}
+
+.busqueda label {
+    font-size: 0.9rem;
+    color: #a0a0a0;
+    margin-bottom: 0.3rem;
+    display: block;
+}
+
+.busqueda input[type="text"],
+.busqueda select {
+    padding: 0.6rem 1rem;
+    border: 1px solid #333;
+    border-radius: 6px;
+    background-color: #2a2a2d;
+    color: #e3e3e3;
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.busqueda input[type="text"]:focus,
+.busqueda select:focus {
+    border-color: #8ab4f8;
+}
+
+.busqueda .boton-buscar {
+    padding: 0.6rem 1.5rem;
+    background-color: #8ab4f8;
+    color: #131314;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.busqueda .boton-buscar:hover {
+    background-color: #6a9ae8;
+}
+
+.busqueda .limpiar {
+    padding: 0.6rem 1rem;
+    color: #a0a0a0;
+    font-size: 0.9rem;
+    transition: color 0.2s;
+}
+
+.busqueda .limpiar:hover {
+    color: #e3e3e3;
+}
+
+/* =========================================
+   LISTADO DE LIBROS (GRID)
+   ========================================= */
+.listado-libros {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.5rem;
+}
+
+/* =========================================
+   CARD DE LIBRO
+   ========================================= */
+.card {
+    background-color: #1e1f20;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+}
+
+.contenido-card {
+    padding: 1rem;
+}
+
+.contenido-card h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    color: #fff;
+}
+
+.contenido-card .autor {
+    font-size: 0.9rem;
+    color: #a0a0a0;
+    margin-bottom: 0.3rem;
+}
+
+.contenido-card .categoria {
+    font-size: 0.85rem;
+    color: #8ab4f8;
+    margin-bottom: 0.3rem;
+}
+
+.contenido-card .editorial {
+    font-size: 0.85rem;
+    color: #666;
+    margin-bottom: 1rem;
+}
+
+/* =========================================
+   BOTONES
+   ========================================= */
+.boton-azul-block {
+    display: block;
+    width: 100%;
+    padding: 0.6rem;
+    text-align: center;
+    background-color: #8ab4f8;
+    color: #131314;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: background-color 0.2s;
+}
+
+.boton-azul-block:hover {
+    background-color: #6a9ae8;
+}
+
+/* =========================================
+   MENSAJE SIN RESULTADOS
+   ========================================= */
+.sin-resultados {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 3rem;
+    color: #a0a0a0;
+    font-size: 1.1rem;
 }

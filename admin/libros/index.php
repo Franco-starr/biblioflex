@@ -33,7 +33,6 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 }
 
 incluirTemplate('header');
-incluirTemplate('navbar');
 ?>
 
 <main class="main-content">
