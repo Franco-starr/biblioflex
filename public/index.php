@@ -25,8 +25,8 @@ incluirTemplate('header');
 incluirTemplate('navbar');
 ?>
 
-<main>
-
+<main class="main-content">
+    
     <h1>Lista de Nuestros Libros</h1>
 
     <form method="GET">

@@ -28,7 +28,7 @@ incluirTemplate('header');
 incluirTemplate('navbar');
 ?>
 
-<main>
+<main class="main-content">
     <h1>Crear Categoría</h1>
 
     <a href="./index.php">Volver</a>

@@ -36,7 +36,7 @@ incluirTemplate('header');
 incluirTemplate('navbar');
 ?>
 
-<main>
+<main class="main-content">
 <h1>Panel de Administración</h1>
 
 <?php
@@ -48,7 +48,7 @@ incluirTemplate('navbar');
 <a href="/admin/index.php">Volver</a>
 
 <a href="./crear.php">Agregar un Libro</a>
-<a href="./categorias/crear.php">Agregar una Categoría</a>
+
 
 <h2>Panel de administracion</h2>
 <table>
@@ -79,7 +79,7 @@ incluirTemplate('navbar');
             <td><?php echo s($libro->stock); ?></td>
             <td> <img src="/imagenes/<?php echo s($libro->imagen); ?>" alt="Imagen del libro" width="100"> </td>
             <td>
-                <a href="./editar.php?id=<?php echo s($libro->id); ?>">Editar</a>
+                <a href="/admin/libros/editar.php?id=<?php echo s($libro->id); ?>">Editar</a>
                 <form method="POST" class="w-100">
                     <input type="hidden" name="id" value="<?php echo s($libro->id); ?>">
                     <input type="hidden" name="tipo" value="libro">

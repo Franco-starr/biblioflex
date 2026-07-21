@@ -56,7 +56,7 @@ incluirTemplate('header');
 incluirTemplate('navbar');
 ?>
 
-<main>
+<main class="main-content">
     <h1>Crear Libro</h1>
 
     <a href="/admin/index.php">Volver</a>

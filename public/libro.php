@@ -18,7 +18,7 @@ incluirTemplate('navbar');
 
 ?>
 
-<main>
+<main class="main-content">
 
 <h1> <?php echo s($libro->titulo); ?></h1>
 

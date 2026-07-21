@@ -38,7 +38,7 @@ incluirTemplate('header');
 incluirTemplate('navbar');
 ?>
 
-<main>
+<main class="main-content">
     <h1>Actualizar Categoría</h1>
 
     <a href="./index.php">Volver</a>

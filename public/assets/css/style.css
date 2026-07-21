@@ -1,50 +1,164 @@
-.listado-libros {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-    padding: 2rem 0;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.card {
-    border: 1px solid #e1e1e1;
-    border-radius: 8px;
-    overflow: hidden;
-    transition: transform 0.3s ease;
-    background-color: #fff;
+body {
+    font-family: Arial, sans-serif;;
 }
 
-.card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+h1 {
+    font-size: 1.5rem;
+    font-weight: bold;
 }
 
-.card img {
-    width: 100%;
-    height: 300px;
-    object-fit: cover;
-}
-
-.contenido-card {
-    padding: 1.5rem;
-}
-
-.contenido-card h3 {
-    margin: 0 0 1rem 0;
-    font-size: 1.8rem;
-}
-
-.contenido-card .autor {
-    color: #666;
-    font-style: italic;
-}
-
-.boton-azul-block {
-    display: block;
-    text-align: center;
-    background-color: #007bff;
-    color: white;
-    padding: 1rem;
+a {
     text-decoration: none;
-    border-radius: 5px;
-    margin-top: 1rem;
+}
+
+p {
+    margin-bottom: 1.5rem;
+}
+
+/* Navbar */
+/* Layout general para asegurar que el contenido no quede debajo de la sidebar fija */
+.app-layout {
+    display: flex;
+    min-height: 100vh;
+    background-color: #131314;
+    color: #e3e3e3;
+}
+
+/* Sidebar fija a la izquierda que se queda al scrollear */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 72px; /* Ancho colapsado (solo iconos) */
+    background-color: #1e1f20;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 0.5rem;
+    gap: 1.5rem;
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1), padding 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 2px 0 8px rgba(0,0,0,0.3);
+    z-index: 1000;
+    overflow-x: hidden;
+    white-space: nowrap;
+}
+
+/* Sidebar Expandida (por hover del mouse o clic en botón) */
+.sidebar.expanded {
+    width: 260px;
+    padding: 1rem;
+}
+
+/* Cabecera del aside */
+.sidebar-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.btn-toggle {
+    background: transparent;
+    border: none;
+    color: #e3e3e3;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s;
+    flex-shrink: 0;
+}
+
+.btn-toggle:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+.logo-text {
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.sidebar.expanded .logo-text {
+    opacity: 1;
+}
+
+.logo-text a {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #fff;
+    text-decoration: none;
+}
+
+.logo-text a span {
+    color: #8ab4f8;
+}
+
+/* Estilos de la lista ul y li para limpiar los puntos por defecto */
+.sidebar nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+/* Estilos de los elementos de navegación */
+.nav-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 10px 12px;
+    border-radius: 24px;
+    color: #e3e3e3;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: background-color 0.2s;
+}
+
+.nav-item:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+.nav-item .icon {
+    font-size: 1.2rem;
+    min-width: 24px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+/* El texto se oculta si está colapsado y aparece al expandir */
+.nav-item .text {
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.sidebar.expanded .nav-item .text {
+    opacity: 1;
+}
+
+/* Clases especiales */
+.nav-item.btn-logout {
+    margin-top: auto; /* Empuja cerrar sesión hacia abajo */
+    color: #f28b82;
+}
+
+.nav-item.admin-link {
+    color: #fde293;
+}
+
+/* Importante: Como la sidebar es 'fixed', desplaza el contenido principal hacia la derecha para que no se encime */
+.main-content {
+    margin-left: 72px; /* Coincide con el ancho colapsado de la sidebar */
+    flex: 1;
+    padding: 2rem;
+    background-color: #131314;
+    color: #e3e3e3;
 }

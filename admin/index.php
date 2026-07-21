@@ -11,7 +11,7 @@ incluirTemplate('header');
 incluirTemplate('navbar');
 ?>
 
-<main>
+<main class="main-content">
     <h1>Panel de Administración</h1>
 
     <div class="admin-dashboard">

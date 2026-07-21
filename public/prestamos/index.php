@@ -13,7 +13,7 @@ incluirTemplate('header');
 incluirTemplate('navbar');
 ?>
 
-<main>
+<main class="main-content">
     <h1>Mis Préstamos</h1>
 
     <?php if (empty($prestamos)): ?>

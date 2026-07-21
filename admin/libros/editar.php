@@ -61,7 +61,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 incluirTemplate('header');
 ?>
 
-<main>
+<main class="main-content">
     <h1>Actualizar Libro</h1>
 
     <a href="./index.php">Volver</a>
