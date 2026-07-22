@@ -38,7 +38,7 @@ incluirTemplate('header');
 incluirTemplate('navbar');
 ?>
 
-<main>
+<main class="main-content">
 <h1>Administración de Préstamos</h1>
 
 <?php
@@ -56,8 +56,9 @@ incluirTemplate('navbar');
     </div>
 <?php endif; ?>
 
-<a href="/admin/index.php">Volver</a>
+<a href="/admin/index.php" class="boton-azul">Volver</a>
 
+<div class="listado-datos">
 <table>
     <thead>
         <tr>
@@ -88,7 +89,7 @@ incluirTemplate('navbar');
                 <?php if($prestamo->estado === 'prestado'): ?>
                     <form method="POST">
                         <input type="hidden" name="id" value="<?php echo s($prestamo->id); ?>">
-                        <input type="submit" value="Devolver" onclick="return confirm('¿Confirmar devolución?')">
+                        <input type="submit" value="Devolver" class="boton-verde" onclick="return confirm('¿Confirmar devolución?')">
                     </form>
                 <?php else: ?>
                     <span>—</span>
@@ -98,6 +99,7 @@ incluirTemplate('navbar');
         <?php endforeach;?>
     </tbody>
 </table>
+</div>
 
 </main>
 

@@ -44,12 +44,13 @@ incluirTemplate('header');
     <p class="alerta exito"><?php echo s($mensaje); ?></p>
 <?php } ?>
 
-<a href="/admin/index.php">Volver</a>
+<a href="/admin/index.php" class="boton-azul">Volver</a>
 
-<a href="./crear.php">Agregar un Libro</a>
+<a href="./crear.php" class="boton-azul">Agregar un Libro</a>
 
 
 <h2>Panel de administracion</h2>
+<div class="listado-datos">
 <table>
     <thead>
         <tr>
@@ -78,17 +79,18 @@ incluirTemplate('header');
             <td><?php echo s($libro->stock); ?></td>
             <td> <img src="/imagenes/<?php echo s($libro->imagen); ?>" alt="Imagen del libro" width="100"> </td>
             <td>
-                <a href="/admin/libros/editar.php?id=<?php echo s($libro->id); ?>">Editar</a>
+                <a href="/admin/libros/editar.php?id=<?php echo s($libro->id); ?>" class="boton-azul">Editar</a>
                 <form method="POST" class="w-100">
                     <input type="hidden" name="id" value="<?php echo s($libro->id); ?>">
                     <input type="hidden" name="tipo" value="libro">
-                    <input type="submit" class="boton-rojo-block" value="Eliminar">
+                    <input type="submit" class="boton-rojo" value="Eliminar">
                 </form>
             </td>
         </tr>
         <?php endforeach;?>
     </tbody>
-</table> <!-- Fin de la tabla -->
+</table>
+</div>
 
 
 

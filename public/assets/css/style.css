@@ -307,6 +307,8 @@ p {
 /* =========================================
    BOTONES
    ========================================= */
+
+/* Azul block — cards pública (botón Ver Detalles) */
 .boton-azul-block {
     display: block;
     width: 100%;
@@ -317,11 +319,65 @@ p {
     border-radius: 6px;
     font-weight: 600;
     font-size: 0.9rem;
+    text-decoration: none;
     transition: background-color 0.2s;
 }
 
 .boton-azul-block:hover {
     background-color: #6a9ae8;
+}
+
+/* Celeste — Volver, navegación genérica */
+.boton-azul {
+    display: inline-block;
+    padding: 0.5rem 1.2rem;
+    background-color: #8ab4f8;
+    color: #131314;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: background-color 0.2s;
+}
+
+.boton-azul:hover {
+    background-color: #6a9ae8;
+}
+
+/* Verde — Crear, Editar, Devolver */
+.boton-verde {
+    display: inline-block;
+    padding: 0.5rem 1.2rem;
+    background-color: #81c784;
+    color: #131314;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.boton-verde:hover {
+    background-color: #6ab86e;
+}
+
+/* Rojo — Eliminar */
+.boton-rojo {
+    display: inline-block;
+    padding: 0.5rem 1.2rem;
+    background-color: #e57373;
+    color: #131314;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.boton-rojo:hover {
+    background-color: #d35f5f;
 }
 
 /* =========================================
@@ -515,6 +571,20 @@ p {
     width: 100%;
 }
 
+.formulario fieldset {
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 2rem;
+    background-color: #1e1f20;
+}
+
+.formulario legend {
+    color: #8ab4f8;
+    font-weight: 600;
+    padding: 0 0.5rem;
+    font-size: 0.95rem;
+}
+
 /* Campo (label + input) */
 .campo {
     margin-bottom: 1.25rem;
@@ -530,7 +600,10 @@ p {
 
 .campo input[type="text"],
 .campo input[type="password"],
-.campo input[type="email"] {
+.campo input[type="email"],
+.campo input[type="number"],
+.campo select,
+.campo input[type="file"] {
     width: 100%;
     padding: 0.7rem 1rem;
     border: 1px solid #333;
@@ -542,6 +615,21 @@ p {
     transition: border-color 0.2s, box-shadow 0.2s;
 }
 
+.campo select {
+    cursor: pointer;
+}
+
+.campo input[type="file"] {
+    padding: 0.5rem;
+    border-style: dashed;
+    cursor: pointer;
+    color: #a0a0a0;
+}
+
+.campo input[type="file"]:hover {
+    border-color: #8ab4f8;
+}
+
 .campo input:focus {
     border-color: #8ab4f8;
     box-shadow: 0 0 0 3px rgba(138, 180, 248, 0.15);
@@ -549,6 +637,11 @@ p {
 
 .campo input::placeholder {
     color: #555;
+}
+
+.imagen-small {
+    border-radius: 6px;
+    margin-top: 0.5rem;
 }
 
 /* Botón submit */
@@ -634,4 +727,41 @@ p {
     object-fit: cover;
     vertical-align: middle;
     margin-right: 0.5rem;
+}
+
+/* =========================================
+   DASHBOARD / PANEL DE OPCIONES
+   ========================================= */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.panel-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 2rem 1rem;
+    background-color: #1e1f20;
+    border-radius: 12px;
+    color: #e3e3e3;
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.panel-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.panel-icono {
+    font-size: 2.5rem;
+}
+
+.panel-texto {
+    font-weight: 600;
+    font-size: 1rem;
 }

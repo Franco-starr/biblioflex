@@ -40,7 +40,7 @@ incluirTemplate('header');
 <main class="main-content">
     <h1>Actualizar Categoría</h1>
 
-    <a href="./index.php">Volver</a>
+    <a href="./index.php" class="boton-azul">Volver</a>
 
     <?php if(!empty($errores)) : ?>
         <div class="errores">
@@ -52,7 +52,7 @@ incluirTemplate('header');
 
     <form class="formulario" method="POST" action="./editar.php?id=<?php echo s($id); ?>">
         <?php include '../../includes/templates/formulario_categoria.php'; ?>
-        <input type="submit" value="Actualizar Categoría" class="boton boton-verde">
+        <input type="submit" value="Actualizar Categoría" class="boton-verde">
     </form>
 
 </main>

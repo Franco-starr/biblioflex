@@ -8,17 +8,28 @@ if (!esAdmin()) {
 }
 
 incluirTemplate('header');
-incluirTemplate('navbar');
 ?>
 
 <main class="main-content">
     <h1>Panel de Administración</h1>
 
-    <div class="admin-dashboard">
-        <a href="/admin/libros/index.php" class="boton boton-azul">Libros</a>
-        <a href="/admin/categoria/index.php" class="boton boton-azul">Categorías</a>
-        <a href="/admin/prestamos/index.php" class="boton boton-azul">Préstamos</a>
-        <a href="/admin/usuario/index.php" class="boton boton-azul">Usuarios</a>
+    <div class="dashboard-grid">
+        <a href="/admin/libros/index.php" class="panel-card">
+            <span class="panel-icono">📚</span>
+            <span class="panel-texto">Libros</span>
+        </a>
+        <a href="/admin/categoria/index.php" class="panel-card">
+            <span class="panel-icono">🏷️</span>
+            <span class="panel-texto">Categorías</span>
+        </a>
+        <a href="/admin/prestamos/index.php" class="panel-card">
+            <span class="panel-icono">📖</span>
+            <span class="panel-texto">Préstamos</span>
+        </a>
+        <a href="/admin/usuario/index.php" class="panel-card">
+            <span class="panel-icono">👤</span>
+            <span class="panel-texto">Usuarios</span>
+        </a>
     </div>
 </main>
 

@@ -58,7 +58,7 @@ incluirTemplate('header');
 <main class="main-content">
     <h1>Crear Libro</h1>
 
-    <a href="/admin/index.php">Volver</a>
+    <a href="/admin/index.php" class="boton-azul">Volver</a>
 
     <?php if(!empty($errores)) : ?>
         <div class="errores">
@@ -71,7 +71,7 @@ incluirTemplate('header');
     <form class="formulario" method="POST" action="/admin/libros/crear.php" enctype="multipart/form-data">
        <?php include '../../includes/templates/formulario_libro.php'; ?>
     
-        <input type="submit" value="Crear Libro" class="boton boton-verde">
+        <input type="submit" value="Crear Libro" class="boton-verde">
     </form>
 
 </main>

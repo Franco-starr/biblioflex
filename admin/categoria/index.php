@@ -50,7 +50,7 @@ incluirTemplate('header');
 <main class="main-content">
 <h1>Categorías</h1>
 
-<a href="/admin/index.php">Volver</a>
+<a href="/admin/index.php" class="boton-azul">Volver</a>
 
 
 <?php
@@ -59,9 +59,10 @@ incluirTemplate('header');
     <p class="alerta exito"><?php echo s($mensaje); ?></p>
 <?php } ?>
 
-<a href="./crear.php">Agregar Categoría</a>
+<a href="./crear.php" class="boton-azul">Agregar Categoría</a>
 
 <h2>Listado de Categorías</h2>
+<div class="listado-datos">
 <table>
     <thead>
         <tr>
@@ -78,17 +79,18 @@ incluirTemplate('header');
             <td><?php echo s($categoria->nombre); ?></td>
             <td><?php echo s($categoria->creado_ed); ?></td>
             <td>
-                <a href="./editar.php?id=<?php echo s($categoria->id); ?>">Editar</a>
+                <a href="./editar.php?id=<?php echo s($categoria->id); ?>" class="boton-azul">Editar</a>
                 <form method="POST" class="w-100">
                     <input type="hidden" name="id" value="<?php echo s($categoria->id); ?>">
                     <input type="hidden" name="tipo" value="categoria">
-                    <input type="submit" class="boton-rojo-block" value="Eliminar">
+                    <input type="submit" class="boton-rojo" value="Eliminar">
                 </form>
             </td>
         </tr>
         <?php endforeach;?>
     </tbody>
 </table>
+</div>
 
 </main>
 

@@ -30,7 +30,7 @@ incluirTemplate('header');
 <main class="main-content">
     <h1>Crear Categoría</h1>
 
-    <a href="./index.php">Volver</a>
+    <a href="./index.php" class="boton-azul">Volver</a>
 
     <?php if(!empty($errores)) : ?>
         <div class="errores">
@@ -42,7 +42,7 @@ incluirTemplate('header');
 
     <form class="formulario" method="POST" action="./crear.php">
         <?php include '../../includes/templates/formulario_categoria.php'; ?>
-        <input type="submit" value="Crear Categoría" class="boton boton-verde">
+        <input type="submit" value="Crear Categoría" class="boton-verde">
     </form>
 
 </main>
