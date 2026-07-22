@@ -54,3 +54,5 @@
         </ul>
     </nav>
 </aside>
+
+<div class="drawer-overlay" id="drawerOverlay"></div>

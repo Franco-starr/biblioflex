@@ -1,20 +1,62 @@
 document.addEventListener('DOMContentLoaded', () => {
     const sidebar = document.getElementById('sidebar');
     const btnToggle = document.getElementById('btnToggle');
+    const overlay = document.getElementById('drawerOverlay');
+    const navLinks = sidebar.querySelectorAll('.nav-item');
 
-    // 1. Clic en el botón hamburguesa (expande o contrae de forma fija)
+    const MOBILE_BREAKPOINT = 768;
+
+    function isMobile() {
+        return window.innerWidth < MOBILE_BREAKPOINT;
+    }
+
+    // ── Mobile: hamburger abre/cierra el drawer ──
     btnToggle.addEventListener('click', (e) => {
         e.stopPropagation();
-        sidebar.classList.toggle('expanded');
+        if (isMobile()) {
+            sidebar.classList.toggle('mobile-open');
+            overlay.classList.toggle('visible');
+        } else {
+            sidebar.classList.toggle('expanded');
+        }
     });
 
-    // 2. Se expande automáticamente al acercar el mouse (Hover)
+    // ── Mobile: cerrar drawer al tocar el overlay ──
+    overlay.addEventListener('click', () => {
+        sidebar.classList.remove('mobile-open');
+        overlay.classList.remove('visible');
+    });
+
+    // ── Mobile: cerrar drawer al tocar un link ──
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            if (isMobile()) {
+                sidebar.classList.remove('mobile-open');
+                overlay.classList.remove('visible');
+            }
+        });
+    });
+
+    // ── Desktop: hover expand / collapse ──
     sidebar.addEventListener('mouseenter', () => {
-        sidebar.classList.add('expanded');
+        if (!isMobile()) {
+            sidebar.classList.add('expanded');
+        }
     });
 
-    // 3. Se contrae automáticamente al alejar el mouse
     sidebar.addEventListener('mouseleave', () => {
-        sidebar.classList.remove('expanded');
+        if (!isMobile()) {
+            sidebar.classList.remove('expanded');
+        }
+    });
+
+    // ── Al cambiar tamaño de ventana, limpiar clases que no corresponden ──
+    window.addEventListener('resize', () => {
+        if (isMobile()) {
+            sidebar.classList.remove('expanded');
+        } else {
+            sidebar.classList.remove('mobile-open');
+            overlay.classList.remove('visible');
+        }
     });
 });
