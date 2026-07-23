@@ -6,11 +6,11 @@ $errores = [];
 
 if ( $_SERVER['REQUEST_METHOD'] === 'POST' ){
     $db = conectarDB();
-    $usuario = $_POST['usuario']; // 
-    $password = $_POST['password']; //
+    $email = $_POST['email'];
+    $password = $_POST['password'];
     // Validaciones
-    if (!$usuario) {
-        $errores[] = 'El usuario es obligatorio';
+    if (!$email) {
+        $errores[] = 'El email es obligatorio';
     }
     if (!$password) {
         $errores[] = 'El password es obligatorio';
@@ -19,9 +19,9 @@ if ( $_SERVER['REQUEST_METHOD'] === 'POST' ){
         $query = "SELECT usuario.*, permisos.nombre_permiso
           FROM usuario
           INNER JOIN permisos ON usuario.permiso = permisos.id
-          WHERE usuario.usuario = ?";
+          WHERE usuario.email = ?";
         $stmt = $db->prepare($query);
-        $stmt->bind_param("s", $usuario);
+        $stmt->bind_param("s", $email);
         $stmt->execute();
         $resultado = $stmt->get_result();
 
@@ -30,7 +30,7 @@ if ( $_SERVER['REQUEST_METHOD'] === 'POST' ){
             if(password_verify($password, $usuarioDB['password'])) {
                 session_regenerate_id(true);
                 $_SESSION['usuario_id'] = $usuarioDB['id'];
-                $_SESSION['usuario'] = $usuarioDB['usuario'];
+                $_SESSION['usuario'] = $usuarioDB['email'];
                 $_SESSION['login'] = true;
                 $_SESSION['permiso'] = $usuarioDB['nombre_permiso'];
 
@@ -75,10 +75,10 @@ if ( $_SERVER['REQUEST_METHOD'] === 'POST' ){
 
             <form method="POST" class="formulario">
                 <div class="campo">
-                    <label for="usuario">Usuario</label>
-                    <input id="usuario" name="usuario" type="text"
-                           placeholder="Ingresá tu usuario"
-                           value="<?php echo s($usuario ?? ''); ?>">
+                    <label for="email">Email</label>
+                    <input id="email" name="email" type="email"
+                           placeholder="Ingresá tu email"
+                           value="<?php echo s($email ?? ''); ?>">
                 </div>
 
                 <div class="campo">

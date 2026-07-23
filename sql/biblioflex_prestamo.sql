@@ -1,49 +1,50 @@
--- MySQL Workbench Synchronization
--- Generated: 2026-07-16 07:44
--- Model: New Model
--- Version: 1.0
--- Project: Name of the project
--- Author: Franco
+-- MySQL dump 10.13  Distrib 8.0.45, for Win64 (x86_64)
+--
+-- Host: localhost    Database: biblioflex
+-- ------------------------------------------------------
+-- Server version	8.4.7
 
-SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
-SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
-SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
-ALTER TABLE `biblioflex`.`permisos` 
-ADD INDEX `index` () VISIBLE;
-;
+--
+-- Table structure for table `prestamo`
+--
 
-ALTER TABLE `biblioflex`.`usuario` 
-;
-ALTER TABLE `biblioflex`.`usuario` RENAME INDEX `FK_usuario_permisos` TO `FK_usuario_permisos_idx`;
-ALTER TABLE `biblioflex`.`usuario` ALTER INDEX `FK_usuario_permisos_idx` VISIBLE;
-
-CREATE TABLE IF NOT EXISTS `biblioflex`.`prestamo` (
-  `usuario_id` INT(10) UNSIGNED NOT NULL,
-  `libro_id` INT(11) NOT NULL,
-  `fecha_prestamo` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `fecha_estimada` DATE NOT NULL,
-  `fecha_devolucion` DATETIME NULL DEFAULT NULL,
-  `estado` ENUM('prestado', 'devuelto', 'atrasado') NOT NULL DEFAULT 'prestado',
-  `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+DROP TABLE IF EXISTS `prestamo`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `prestamo` (
+  `usuario_id` int unsigned NOT NULL,
+  `libro_id` int NOT NULL,
+  `fecha_prestamo` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `fecha_estimada` date NOT NULL,
+  `fecha_devolucion` datetime DEFAULT NULL,
+  `estado` enum('prestado','devuelto','atrasado') NOT NULL DEFAULT 'prestado',
+  `id` int unsigned NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`),
-  INDEX `idx` (`usuario_id` ASC) VISIBLE,
-  INDEX `FK_libro_prestamo_idx` (`libro_id` ASC) VISIBLE,
-  CONSTRAINT `fk_usuario_prestamo`
-    FOREIGN KEY (`usuario_id`)
-    REFERENCES `biblioflex`.`usuario` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `FK_libro_prestamo`
-    FOREIGN KEY (`libro_id`)
-    REFERENCES `biblioflex`.`libros` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+  KEY `idx` (`usuario_id`),
+  KEY `FK_libro_prestamo_idx` (`libro_id`),
+  CONSTRAINT `FK_libro_prestamo` FOREIGN KEY (`libro_id`) REFERENCES `libros` (`id`),
+  CONSTRAINT `fk_usuario_prestamo` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
-SET SQL_MODE=@OLD_SQL_MODE;
-SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+-- Dump completed on 2026-07-23 18:01:40

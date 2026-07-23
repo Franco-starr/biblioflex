@@ -9,38 +9,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $nombre = trim($_POST['nombre']);
     $apellido = trim($_POST['apellido']);
-    $usuario = trim($_POST['usuario']);
+    $email = trim($_POST['email']);
     $password = trim($_POST['password']);
     $confirmar = trim($_POST['confirmar_password']);
 
     // Validaciones
     if (!$nombre) $errores[] = 'El nombre es obligatorio';
     if (!$apellido) $errores[] = 'El apellido es obligatorio';
-    if (!$usuario) $errores[] = 'El usuario es obligatorio';
+    if (!$email) $errores[] = 'El email es obligatorio';
+    if ($email && !filter_var($email, FILTER_VALIDATE_EMAIL)) $errores[] = 'El email no es válido';
     if (!$password) $errores[] = 'La contraseña es obligatoria';
     if ($password !== $confirmar) $errores[] = 'Las contraseñas no coinciden';
 
-    
-
-    // Verificar usuario duplicado
-    $stmt = $db->prepare("SELECT id FROM usuario WHERE usuario = ?");
-    $stmt->bind_param("s", $usuario);
+    // Verificar email duplicado
+    $stmt = $db->prepare("SELECT id FROM usuario WHERE email = ?");
+    $stmt->bind_param("s", $email);
     $stmt->execute();
     $resultado = $stmt->get_result();
     if ($resultado->num_rows > 0) {
-        $errores[] = 'El usuario ya existe';
+        $errores[] = 'El email ya está registrado';
     }
 
     if (empty($errores)) {
-        //password hash?
-        
-        $query = "INSERT INTO usuario (nombre, apellido, usuario, password, permiso)
+        $query = "INSERT INTO usuario (nombre, apellido, email, password, permiso)
                 VALUES (?, ?, ?, ?, 2)";
-        // 2. Preparar el statement
         $stmt = $db->prepare($query);
         $contrasenaHash = password_hash($password, PASSWORD_BCRYPT);
-        $stmt->bind_param("ssss", $nombre, $apellido, $usuario, $contrasenaHash); // 4. Vincular los parámetros (s = string)
-        $resultado = $stmt->execute(); //ejecutar consultar
+        $stmt->bind_param("ssss", $nombre, $apellido, $email, $contrasenaHash);
+        $resultado = $stmt->execute();
 
         if ($resultado) {
             header('Location: ./login.php');
@@ -86,10 +82,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
 
                 <div class="campo">
-                    <label for="usuario">Usuario</label>
-                    <input id="usuario" name="usuario" type="text"
-                           placeholder="Elegí un nombre de usuario"
-                           value="<?php echo s($usuario ?? ''); ?>">
+                    <label for="email">Email</label>
+                    <input id="email" name="email" type="email"
+                           placeholder="Ingresá tu email"
+                           value="<?php echo s($email ?? ''); ?>">
                 </div>
 
                 <div class="campo">

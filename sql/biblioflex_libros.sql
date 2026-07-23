@@ -27,7 +27,7 @@ CREATE TABLE `libros` (
   `titulo` varchar(255) NOT NULL,
   `autor` varchar(255) NOT NULL DEFAULT '',
   `editorial` varchar(150) DEFAULT '',
-  `anio_publicacion` year NOT NULL,
+  `anio_publicacion` int NOT NULL,
   `isbn` varchar(20) DEFAULT NULL,
   `categoria_id` int NOT NULL,
   `stock` int NOT NULL,
@@ -38,18 +38,8 @@ CREATE TABLE `libros` (
   UNIQUE KEY `isbn` (`isbn`),
   KEY `FK_libros_categoria` (`categoria_id`),
   CONSTRAINT `FK_libros_categoria` FOREIGN KEY (`categoria_id`) REFERENCES `categoria` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `libros`
---
-
-LOCK TABLES `libros` WRITE;
-/*!40000 ALTER TABLE `libros` DISABLE KEYS */;
-INSERT INTO `libros` VALUES (1,'clean code','Robert C. Martin','Prentice Hail',2008,'9780132350884',1,5,'clea_code.jpg',1,'2026-02-01 08:08:26');
-/*!40000 ALTER TABLE `libros` ENABLE KEYS */;
-UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -60,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-02-01 17:50:46
+-- Dump completed on 2026-07-23 18:01:38
