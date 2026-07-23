@@ -69,16 +69,16 @@ incluirTemplate('header');
     <tbody>
         <?php foreach($libros as $libro): ?>
         <tr>
-            <td><?php echo s($libro->id); ?></td>
-            <td><?php echo s($libro->titulo); ?></td>
-            <td><?php echo s($libro->autor); ?></td>
-            <td><?php echo s($libro->editorial); ?></td>
-            <td><?php echo s($libro->anio_publicacion); ?></td>
-            <td><?php echo s($libro->isbn); ?></td>
-            <td><?php echo s($libro->categoria_nombre); ?></td>
-            <td><?php echo s($libro->stock); ?></td>
-            <td> <img src="/imagenes/<?php echo s($libro->imagen); ?>" alt="Imagen del libro" width="100"> </td>
-            <td>
+            <td data-label="ID"><?php echo s($libro->id); ?></td>
+            <td data-label="Título"><?php echo s($libro->titulo); ?></td>
+            <td data-label="Autor"><?php echo s($libro->autor); ?></td>
+            <td data-label="Editorial"><?php echo s($libro->editorial); ?></td>
+            <td data-label="Año"><?php echo s($libro->anio_publicacion); ?></td>
+            <td data-label="ISBN"><?php echo s($libro->isbn); ?></td>
+            <td data-label="Categoría"><?php echo s($libro->categoria_nombre); ?></td>
+            <td data-label="Stock"><?php echo s($libro->stock); ?></td>
+            <td data-label="Imagen"> <img src="/imagenes/<?php echo s($libro->imagen); ?>" alt="Imagen del libro" width="100"> </td>
+            <td data-label="Acciones">
                 <a href="/admin/libros/editar.php?id=<?php echo s($libro->id); ?>" class="boton-azul">Editar</a>
                 <form method="POST" class="w-100">
                     <input type="hidden" name="id" value="<?php echo s($libro->id); ?>">

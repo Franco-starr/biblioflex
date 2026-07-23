@@ -75,10 +75,10 @@ incluirTemplate('header');
     <tbody>
         <?php foreach($categorias as $categoria): ?>
         <tr>
-            <td><?php echo s($categoria->id); ?></td>
-            <td><?php echo s($categoria->nombre); ?></td>
-            <td><?php echo s($categoria->creado_ed); ?></td>
-            <td>
+            <td data-label="ID"><?php echo s($categoria->id); ?></td>
+            <td data-label="Nombre"><?php echo s($categoria->nombre); ?></td>
+            <td data-label="Creado"><?php echo s($categoria->creado_ed); ?></td>
+            <td data-label="Acciones">
                 <a href="./editar.php?id=<?php echo s($categoria->id); ?>" class="boton-azul">Editar</a>
                 <form method="POST" class="w-100">
                     <input type="hidden" name="id" value="<?php echo s($categoria->id); ?>">

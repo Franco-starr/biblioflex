@@ -33,14 +33,14 @@ incluirTemplate('header');
                 <tbody>
                     <?php foreach($prestamos as $prestamo): ?>
                     <tr>
-                        <td>
+                        <td data-label="Libro">
                             <img src="/imagenes/<?php echo s($prestamo->imagen); ?>" alt="<?php echo s($prestamo->titulo); ?>" width="50">
                             <?php echo s($prestamo->titulo); ?>
                         </td>
-                        <td><?php echo s($prestamo->fecha_prestamo); ?></td>
-                        <td><?php echo s($prestamo->fecha_estimada); ?></td>
-                        <td><?php echo $prestamo->fecha_devolucion ? s($prestamo->fecha_devolucion) : '-'; ?></td>
-                        <td><?php echo s($prestamo->estado); ?></td>
+                        <td data-label="Fecha Préstamo"><?php echo s($prestamo->fecha_prestamo); ?></td>
+                        <td data-label="Fecha Estimada"><?php echo s($prestamo->fecha_estimada); ?></td>
+                        <td data-label="Devolución"><?php echo $prestamo->fecha_devolucion ? s($prestamo->fecha_devolucion) : '-'; ?></td>
+                        <td data-label="Estado"><?php echo s($prestamo->estado); ?></td>
                     </tr>
                     <?php endforeach; ?>
                 </tbody>
