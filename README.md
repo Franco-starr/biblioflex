@@ -123,6 +123,4 @@ biblioflex/
 └── composer.json
 ```
 
-## Autor
 
-**Franco** — franco.star.dev@gmail.com
