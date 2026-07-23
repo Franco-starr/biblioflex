@@ -699,6 +699,7 @@ p {
     background-color: #1e1f20;
     border-radius: 8px;
     overflow: hidden;
+    font-size: 0.85rem;
 }
 
 .listado-datos thead {
@@ -709,7 +710,7 @@ p {
 
 .listado-datos th,
 .listado-datos td {
-    padding: 0.75rem 1rem;
+    padding: 0.5rem 0.75rem;
     text-align: left;
     border-bottom: 1px solid #333;
 }
@@ -723,10 +724,25 @@ p {
 }
 
 .listado-datos img {
+    width: 50px;
     border-radius: 4px;
     object-fit: cover;
     vertical-align: middle;
     margin-right: 0.5rem;
+}
+
+/* =========================================
+   TABLA ADMIN LIBROS — OCULTAR COLUMNAS EN PANTALLAS ANGOSTAS
+   ========================================= */
+@media (max-width: 1200px) {
+    .tabla-libros th:nth-child(1),
+    .tabla-libros td:nth-child(1),
+    .tabla-libros th:nth-child(5),
+    .tabla-libros td:nth-child(5),
+    .tabla-libros th:nth-child(6),
+    .tabla-libros td:nth-child(6) {
+        display: none;
+    }
 }
 
 /* =========================================
