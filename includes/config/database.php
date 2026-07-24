@@ -6,7 +6,7 @@ function conectarDB() {
 
     $host = $env['DB_HOST'];
     $usuario = $env['DB_USER'];
-    $password = $env['DB_PASS'];
+    $password = $env['DB_PASSWORD'];
     $base = $env['DB_NAME'];
 
     $db = new mysqli($host, $usuario, $password, $base);
