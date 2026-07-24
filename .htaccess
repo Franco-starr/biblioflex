@@ -1,0 +1,43 @@
+RewriteEngine On
+
+# Quitar prefijo /public/ → redirige a URL limpia
+# /public/login.php → /login.php
+RewriteRule ^public/(.+)$ /$1 [R=301,L]
+
+# Quitar extension .php → redirige a URL limpia
+# /login.php → /login
+# /admin/libros.php → /admin/libros
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.+)\.php$ /$1 [R=301,L]
+
+# --- Rewrites internos (sirve el archivo correcto sin redirección) ---
+
+# No reescribir archivos o directorios que existen
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# /admin/X/Y → admin/X/Y.php (ej: /admin/libros/crear → admin/libros/crear.php)
+RewriteCond %{DOCUMENT_ROOT}/admin/$1.php -f
+RewriteRule ^admin/(.+)$ /admin/$1.php [L,QSA]
+
+# /admin/X → admin/X/index.php (ej: /admin/libros → admin/libros/index.php)
+RewriteCond %{DOCUMENT_ROOT}/admin/$1/index.php -f
+RewriteRule ^admin/(.+)$ /admin/$1/index.php [L,QSA]
+
+# /admin → admin/index.php
+RewriteRule ^admin/?$ /admin/index.php [L,QSA]
+
+# /assets/* → public/assets/* (CSS, JS, imágenes)
+RewriteCond %{DOCUMENT_ROOT}/public/$1 -f
+RewriteRule ^assets/(.+)$ /public/assets/$1 [L]
+
+# /X/Y → public/X/Y.php (ej: /prestamos/crear → public/prestamos/crear.php)
+RewriteCond %{DOCUMENT_ROOT}/public/$1.php -f
+RewriteRule ^(.+)$ /public/$1.php [L,QSA]
+
+# /X → public/X/index.php (ej: /prestamos → public/prestamos/index.php)
+RewriteCond %{DOCUMENT_ROOT}/public/$1/index.php -f
+RewriteRule ^(.+)$ /public/$1/index.php [L,QSA]
+
+# / → public/index.php (página principal)
+RewriteRule ^/?$ /public/index.php [L]
