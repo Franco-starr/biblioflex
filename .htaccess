@@ -1,0 +1,13 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Si la URL empieza por /admin/ o /public/, no aplicar ninguna regla y dejarla pasar tal cual
+    RewriteCond %{REQUEST_URI} ^/admin/ [NC]
+    RewriteRule ^ - [L]
+
+    RewriteCond %{REQUEST_URI} ^/public/ [NC]
+    RewriteRule ^ - [L]
+
+    # Para cualquier otra cosa (la raíz del sitio), enviar el tráfico de forma interna hacia la carpeta public/
+    RewriteRule ^(.*)$ public/$1 [L]
+</IfModule>
