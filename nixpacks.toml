@@ -3,6 +3,7 @@ nixPkgs = [
     "php82",
     "php82Extensions.mysqli",
     "php82Extensions.pdo_mysql",
+    "php82Extensions.gd",
     "nginx",
     "libmysqlclient",
     "php82Packages.composer"
