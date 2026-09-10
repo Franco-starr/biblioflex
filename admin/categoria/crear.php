@@ -2,7 +2,7 @@
 require_once __DIR__ . '/../../includes/app.php';
 estaAutenticado();
 if (!esAdmin()) {
-    header('Location: /public/index.php'); 
+    header('Location: /'); 
     exit;
 }
 
@@ -18,7 +18,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     if(empty($errores)) {
         $resultado = $categoria->guardar();
         if($resultado) {
-            header('Location: ./index.php?resultado=1');
+            header('Location: /admin/categoria?resultado=1');
             exit;
         }
     }
@@ -30,7 +30,7 @@ incluirTemplate('header');
 <main class="main-content">
     <h1>Crear Categoría</h1>
 
-    <a href="./index.php" class="boton-azul">Volver</a>
+    <a href="/admin/categoria" class="boton-azul">Volver</a>
 
     <?php if(!empty($errores)) : ?>
         <div class="errores">
@@ -40,7 +40,7 @@ incluirTemplate('header');
         </div>
     <?php endif; ?>
 
-    <form class="formulario" method="POST" action="./crear.php">
+    <form class="formulario" method="POST" action="/admin/categoria/crear">
         <?php include '../../includes/templates/formulario_categoria.php'; ?>
         <input type="submit" value="Crear Categoría" class="boton-verde">
     </form>

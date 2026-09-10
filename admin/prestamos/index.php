@@ -3,7 +3,7 @@ require_once __DIR__ . '/../../includes/app.php';
 estaAutenticado();
 
 if(!esAdmin()) {
-    header('Location: /public/index.php');
+    header('Location: /');
     exit;
 }
 
@@ -22,12 +22,12 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         if($prestamo) {
             $resultado = $prestamo->devolverLibro();
             if($resultado) {
-                header('location: ./index.php?resultado=4');
+                header('location: /admin/prestamos?resultado=4');
                 exit;
             } else {
                 $errores = Prestamo::getErrores();
                 $mensajeError = urlencode(implode('|', $errores));
-                header("location: ./index.php?error={$mensajeError}");
+                header("location: /admin/prestamos?error={$mensajeError}");
                 exit;
             }
         }
@@ -56,7 +56,7 @@ incluirTemplate('navbar');
     </div>
 <?php endif; ?>
 
-<a href="/admin/index.php" class="boton-azul">Volver</a>
+<a href="/admin" class="boton-azul">Volver</a>
 
 <div class="listado-datos">
 <table>

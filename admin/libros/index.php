@@ -2,7 +2,7 @@
 require_once __DIR__ . '/../../includes/app.php';
 estaAutenticado();
 if (!esAdmin()) {
-    header('Location: /public/index.php'); 
+    header('Location: /'); 
     exit;
 }
 
@@ -24,7 +24,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
             if($tipo === 'libro') {
                 $libro = Libro::find($id);
                 $libro->eliminar();
-                header('location: ./index.php?resultado=3');
+                header('location: /admin/libros?resultado=3');
                 exit;
             }
         }
@@ -46,9 +46,9 @@ incluirTemplate('header');
             <p class="alerta exito"><?php echo s($mensaje); ?></p>
         <?php } ?>
 
-        <a href="/admin/index.php" class="boton-azul">Volver</a>
+        <a href="/admin" class="boton-azul">Volver</a>
 
-        <a href="./crear.php" class="boton-azul">Agregar un Libro</a>
+        <a href="/admin/libros/crear" class="boton-azul">Agregar un Libro</a>
 
 
         <div class="listado-datos">
@@ -81,7 +81,7 @@ incluirTemplate('header');
                         <td data-label="Stock"><?php echo s($libro->stock); ?></td>
                         <td data-label="Imagen"> <img src="/imagenes/<?php echo s($libro->imagen); ?>" alt="Imagen del libro" width="100"> </td>
                         <td data-label="Acciones">
-                            <a href="/admin/libros/editar.php?id=<?php echo s($libro->id); ?>" class="boton-azul">Editar</a>
+                            <a href="/admin/libros/editar?id=<?php echo s($libro->id); ?>" class="boton-azul">Editar</a>
                             <form method="POST" class="w-100">
                                 <input type="hidden" name="id" value="<?php echo s($libro->id); ?>">
                                 <input type="hidden" name="tipo" value="libro">

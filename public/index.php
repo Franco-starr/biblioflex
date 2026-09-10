@@ -56,7 +56,7 @@ incluirTemplate('header');
             </div>
 
             <button type="submit" class="boton-buscar">Filtrar</button>
-            <a href="index.php" class="limpiar">Limpiar</a>
+            <a href="/" class="limpiar">Limpiar</a>
         </form>
         
 
@@ -71,7 +71,7 @@ incluirTemplate('header');
                             <p class="autor"><?php echo s($libro->autor); ?></p>
                             <p class="categoria">Categoría: <span><?php echo s($libro->categoria_nombre); ?></span></p>
                             <p class="editorial"><?php echo s($libro->editorial); ?></p>
-                            <a href="libro.php?id=<?php echo s($libro->id); ?>" class="boton-azul-block">
+                            <a href="/libro?id=<?php echo s($libro->id); ?>" class="boton-azul-block">
                                 Ver Detalles
                             </a>
                         </div>

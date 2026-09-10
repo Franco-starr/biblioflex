@@ -3,7 +3,7 @@ require_once __DIR__ . '/../../includes/app.php';
 use App\Prestamo;
 
 if (!estaLogueado()) {
-    header('Location: /public/login.php');
+    header('Location: /login');
     exit;
 }
 

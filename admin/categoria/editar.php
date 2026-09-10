@@ -2,7 +2,7 @@
 require_once __DIR__ . '/../../includes/app.php';
 estaAutenticado();
 if (!esAdmin()) {
-    header('Location: /public/index.php'); 
+    header('Location: /'); 
     exit;
 }
 
@@ -12,7 +12,7 @@ $id = $_GET['id'];
 $id = filter_var($id, FILTER_VALIDATE_INT);
 
 if (!$id) {
-    header('LOCATION: ./index.php');
+    header('LOCATION: /admin/categoria');
     exit;
 }
 
@@ -28,7 +28,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     if(empty($errores)) {
         $resultado = $categoria->guardar();
         if($resultado) {
-            header('Location: ./index.php?resultado=2');
+            header('Location: /admin/categoria?resultado=2');
             exit;
         }
     }
@@ -40,7 +40,7 @@ incluirTemplate('header');
 <main class="main-content">
     <h1>Actualizar Categoría</h1>
 
-    <a href="./index.php" class="boton-azul">Volver</a>
+    <a href="/admin/categoria" class="boton-azul">Volver</a>
 
     <?php if(!empty($errores)) : ?>
         <div class="errores">
@@ -50,7 +50,7 @@ incluirTemplate('header');
         </div>
     <?php endif; ?>
 
-    <form class="formulario" method="POST" action="./editar.php?id=<?php echo s($id); ?>">
+    <form class="formulario" method="POST" action="/admin/categoria/editar?id=<?php echo s($id); ?>">
         <?php include '../../includes/templates/formulario_categoria.php'; ?>
         <input type="submit" value="Actualizar Categoría" class="boton-verde">
     </form>

@@ -34,7 +34,7 @@ if ( $_SERVER['REQUEST_METHOD'] === 'POST' ){
                 $_SESSION['login'] = true;
                 $_SESSION['permiso'] = $usuarioDB['nombre_permiso'];
 
-                header('Location: ./index.php');
+                header('Location: /');
                 exit;
             } else {
                 $errores[] = 'Credenciales incorrectas';
@@ -90,7 +90,7 @@ if ( $_SERVER['REQUEST_METHOD'] === 'POST' ){
                 <button type="submit" class="boton-submit">Iniciar Sesión</button>
             </form>
 
-            <p class="link-secundario">¿No tenés cuenta? <a href="./register.php">Registrate</a></p>
+            <p class="link-secundario">¿No tenés cuenta? <a href="/register">Registrate</a></p>
         </div>
 
     </div>

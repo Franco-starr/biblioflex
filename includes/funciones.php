@@ -11,7 +11,7 @@ function estaAutenticado() {
     }
 
     if(!isset($_SESSION['login']) || $_SESSION['login'] !== true) {
-        header('Location: ../public/login.php');
+        header('Location: /login');
         exit;
     }
 }

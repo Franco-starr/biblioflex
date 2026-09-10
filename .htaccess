@@ -1,0 +1,68 @@
+Options -Indexes
+
+RewriteEngine On
+
+# --- Seguridad: bloquear acceso directo a carpetas internas ---
+RewriteRule ^(includes|models|sql|vendor)(/|$) - [F,L]
+
+<FilesMatch "^(\.env|\.htaccess)$">
+    Require all denied
+</FilesMatch>
+
+# --- Redirecciones de URLs viejas (compatibilidad) ---
+# Solo aplican a peticiones directas del navegador: %{ENV:REDIRECT_STATUS} vacío
+# evita que re-procesen rutas ya reescritas internamente (/public/*) y provoquen loops.
+
+# Quita el prefijo /public (ej: /public/login.php -> /login.php)
+RewriteCond %{ENV:REDIRECT_STATUS} ^$
+RewriteRule ^public/(.+)$ /$1 [R=301,QSA,L]
+
+# /index.php -> / (home)
+RewriteCond %{ENV:REDIRECT_STATUS} ^$
+RewriteRule ^index\.php$ / [R=301,L]
+
+# Quita la extensión .php (ej: /login.php -> /login)
+RewriteCond %{ENV:REDIRECT_STATUS} ^$
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.+)\.php$ /$1 [R=301,QSA,L]
+
+# /index -> / (home)
+RewriteCond %{ENV:REDIRECT_STATUS} ^$
+RewriteRule ^index/?$ / [R=301,L]
+
+# --- Rewrites internos (sirve el archivo real, sin mostrar .php) ---
+
+# Assets: /assets/* -> /public/assets/*
+RewriteCond %{ENV:REDIRECT_STATUS} ^$
+RewriteCond %{DOCUMENT_ROOT}/public/assets/$1 -f
+RewriteRule ^assets/(.+)$ /public/assets/$1 [L]
+
+# Admin: /admin -> admin/index.php
+RewriteCond %{ENV:REDIRECT_STATUS} ^$
+RewriteCond %{DOCUMENT_ROOT}/admin/index.php -f
+RewriteRule ^admin/?$ /admin/index.php [L,QSA]
+
+# Admin: /admin/X/Y -> admin/X/Y.php (crear, editar)
+RewriteCond %{ENV:REDIRECT_STATUS} ^$
+RewriteCond %{DOCUMENT_ROOT}/admin/$1.php -f
+RewriteRule ^admin/(.+)$ /admin/$1.php [L,QSA]
+
+# Admin: /admin/X -> admin/X/index.php (libros, categoria, prestamos)
+RewriteCond %{ENV:REDIRECT_STATUS} ^$
+RewriteCond %{DOCUMENT_ROOT}/admin/$1/index.php -f
+RewriteRule ^admin/(.+)$ /admin/$1/index.php [L,QSA]
+
+# Público: /X -> public/X.php (login, register, logout, libro, prestamos/crear)
+RewriteCond %{ENV:REDIRECT_STATUS} ^$
+RewriteCond %{DOCUMENT_ROOT}/public/$1.php -f
+RewriteRule ^(.+)$ /public/$1.php [L,QSA]
+
+# Público: /X -> public/X/index.php (prestamos)
+RewriteCond %{ENV:REDIRECT_STATUS} ^$
+RewriteCond %{DOCUMENT_ROOT}/public/$1/index.php -f
+RewriteRule ^(.+)$ /public/$1/index.php [L,QSA]
+
+# Home: / -> public/index.php
+RewriteCond %{ENV:REDIRECT_STATUS} ^$
+RewriteRule ^/?$ /public/index.php [L]

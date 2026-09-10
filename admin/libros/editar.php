@@ -3,7 +3,7 @@
 require_once __DIR__ . '/../../includes/app.php';
 estaAutenticado();
 if (!esAdmin()) {
-    header('Location: /public/index.php'); 
+    header('Location: /'); 
     exit;
 }
 
@@ -16,7 +16,7 @@ $id = $_GET['id'];
 $id = filter_var($id, FILTER_VALIDATE_INT);
 
 if (!$id) {
-    header('LOCATION: ./index.php');
+    header('LOCATION: /admin/libros');
     exit;
 }
 
@@ -52,7 +52,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     if(empty($errores)) {
         $resultado = $libro->guardar();
         if($resultado) {
-            header('Location: ./index.php?resultado=2');
+            header('Location: /admin/libros?resultado=2');
             exit;
         }
     }
@@ -64,7 +64,7 @@ incluirTemplate('header');
 <main class="main-content">
     <h1>Actualizar Libro</h1>
 
-    <a href="./index.php" class="boton-azul">Volver</a>
+    <a href="/admin/libros" class="boton-azul">Volver</a>
 
     <?php if(!empty($errores)) : ?>
         <div class="errores">
@@ -74,7 +74,7 @@ incluirTemplate('header');
         </div>
     <?php endif; ?>
 
-    <form class="formulario" method="POST" action="/admin/libros/editar.php?id=<?php echo s($id); ?>" enctype="multipart/form-data">
+    <form class="formulario" method="POST" action="/admin/libros/editar?id=<?php echo s($id); ?>" enctype="multipart/form-data">
        <?php include '../../includes/templates/formulario_libro.php'; ?>
     
         <input type="submit" value="Actualizar Libro" class="boton-verde">
