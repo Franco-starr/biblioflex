@@ -11,6 +11,16 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Configurar PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: gd, mysqli
+          coverage: none
+
+      - name: Instalar dependencias (vendor/)
+        run: composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader
+
       - name: Subir por FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
@@ -18,11 +28,15 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           port: 21
-          server-dir: ${{ secrets.FTP_DIR || 'htdocs/' }}
+          server-dir: htdocs/
           dangerous-clean-slate: false
+          git-status: false
           exclude: |
-            **/.git*
-            **/.git*/**/
+            .git
+            .git*
+            .git/**
+            .github/
+            .github/**
             imagenes/
             imagenes/**
             .env
@@ -32,4 +46,4 @@ jobs:
             nginx.conf
             docker-entrypoint.sh
             .dockerignore
-            .github
+            Nuevo-documento-de-texto.txt
