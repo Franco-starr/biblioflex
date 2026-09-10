@@ -21,6 +21,11 @@ jobs:
       - name: Instalar dependencias (vendor/)
         run: composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader
 
+      - name: Limpiar dotfiles de vendor (InfinityFree FTP los rechaza)
+        run: |
+          find vendor -type d -name '.*' -prune -exec rm -rf {} +
+          find vendor -name '.*' -type f -delete
+
       - name: Subir por FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
@@ -30,7 +35,6 @@ jobs:
           port: 21
           server-dir: htdocs/
           dangerous-clean-slate: false
-          git-status: false
           exclude: |
             .git
             .git*
