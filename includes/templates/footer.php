@@ -6,6 +6,6 @@
     </footer>
 
 <!--<script src=""></script>->-->
-<script src="/assets/js/style.js"></script>
+<script src="<?php echo base_url('/assets/js/style.js'); ?>"></script>
 </body>
 </html>

@@ -3,7 +3,7 @@ require_once __DIR__ . '/../includes/app.php';
 estaAutenticado();
 
 if (!esAdmin()) {
-    header('Location: /'); // Acceso denegado: afuera al index
+    header('Location: ' . base_url('/')); // Acceso denegado: afuera al index
     exit;
 }
 
@@ -15,19 +15,19 @@ incluirTemplate('header');
         <h1>Panel de Administración</h1>
 
         <div class="dashboard-grid">
-            <a href="/admin/libros" class="panel-card">
+            <a href="<?php echo base_url('/admin/libros'); ?>" class="panel-card">
                 <span class="panel-icono">📚</span>
                 <span class="panel-texto">Libros</span>
             </a>
-            <a href="/admin/categoria" class="panel-card">
+            <a href="<?php echo base_url('/admin/categoria'); ?>" class="panel-card">
                 <span class="panel-icono">🏷️</span>
                 <span class="panel-texto">Categorías</span>
             </a>
-            <a href="/admin/prestamos" class="panel-card">
+            <a href="<?php echo base_url('/admin/prestamos'); ?>" class="panel-card">
                 <span class="panel-icono">📖</span>
                 <span class="panel-texto">Préstamos</span>
             </a>
-            <a href="/admin/usuario" class="panel-card">
+            <a href="<?php echo base_url('/admin/usuario'); ?>" class="panel-card">
                 <span class="panel-icono">👤</span>
                 <span class="panel-texto">Usuarios</span>
             </a>

@@ -9,60 +9,79 @@ RewriteRule ^(includes|models|sql|vendor)(/|$) - [F,L]
     Require all denied
 </FilesMatch>
 
+# --- Detecta la base de la app ---
+# '' cuando corre en la raiz del dominio (biblioflex.test / hosting),
+# /biblioflex cuando corre debajo de www (localhost/biblioflex).
+# Es subcarpeta SOLO si el docroot no tiene /public y el primer segmento
+# de la URL apunta a una carpeta que si la contiene.
+RewriteCond %{DOCUMENT_ROOT}/public !-d
+RewriteCond %{REQUEST_URI} ^/([a-zA-Z0-9_-]+)/
+RewriteRule ^ - [E=BASE:/%1]
+
 # --- Redirecciones de URLs viejas (compatibilidad) ---
-# Solo aplican a peticiones directas del navegador: %{ENV:REDIRECT_STATUS} vacío
-# evita que re-procesen rutas ya reescritas internamente (/public/*) y provoquen loops.
+# Solo aplican en modo raiz. En subcarpeta (localhost/biblioflex) se omiten
+# para no redirigir a la raiz del dominio. %{ENV:REDIRECT_STATUS} vacio evita
+# re-procesar rutas ya reescritas internamente y provocar loops.
 
 # Quita el prefijo /public (ej: /public/login.php -> /login.php)
 RewriteCond %{ENV:REDIRECT_STATUS} ^$
+RewriteCond %{REQUEST_URI} !^/biblioflex
 RewriteRule ^public/(.+)$ /$1 [R=301,QSA,L]
 
 # /index.php -> / (home)
 RewriteCond %{ENV:REDIRECT_STATUS} ^$
+RewriteCond %{REQUEST_URI} !^/biblioflex
 RewriteRule ^index\.php$ / [R=301,L]
 
 # Quita la extensión .php (ej: /login.php -> /login)
 RewriteCond %{ENV:REDIRECT_STATUS} ^$
+RewriteCond %{REQUEST_URI} !^/biblioflex
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.+)\.php$ /$1 [R=301,QSA,L]
 
 # /index -> / (home)
 RewriteCond %{ENV:REDIRECT_STATUS} ^$
+RewriteCond %{REQUEST_URI} !^/biblioflex
 RewriteRule ^index/?$ / [R=301,L]
 
-# --- Rewrites internos (sirve el archivo real, sin mostrar .php) ---
+# --- Rewrites internos (raiz y subcarpeta) ---
+# Condiciones absolutas con %{DOCUMENT_ROOT} + BASE; destinos relativos que
+# Apache resuelve contra la carpeta del proyecto (per-dir prefix).
 
 # Assets: /assets/* -> /public/assets/*
 RewriteCond %{ENV:REDIRECT_STATUS} ^$
-RewriteCond %{DOCUMENT_ROOT}/public/assets/$1 -f
-RewriteRule ^assets/(.+)$ /public/assets/$1 [L]
+RewriteCond %{DOCUMENT_ROOT}%{ENV:BASE}/public/assets/$1 -f
+RewriteRule ^assets/(.+)$ public/assets/$1 [L]
 
 # Admin: /admin -> admin/index.php
 RewriteCond %{ENV:REDIRECT_STATUS} ^$
-RewriteCond %{DOCUMENT_ROOT}/admin/index.php -f
-RewriteRule ^admin/?$ /admin/index.php [L,QSA]
+RewriteCond %{DOCUMENT_ROOT}%{ENV:BASE}/admin/index.php -f
+RewriteRule ^admin/?$ admin/index.php [L,QSA]
 
-# Admin: /admin/X/Y -> admin/X/Y.php (crear, editar)
+# Admin: /admin/X -> admin/X.php (crear, editar)
 RewriteCond %{ENV:REDIRECT_STATUS} ^$
-RewriteCond %{DOCUMENT_ROOT}/admin/$1.php -f
-RewriteRule ^admin/(.+)$ /admin/$1.php [L,QSA]
+RewriteCond %{DOCUMENT_ROOT}%{ENV:BASE}/admin/$1.php -f
+RewriteRule ^admin/(.+)$ admin/$1.php [L,QSA]
 
 # Admin: /admin/X -> admin/X/index.php (libros, categoria, prestamos)
 RewriteCond %{ENV:REDIRECT_STATUS} ^$
-RewriteCond %{DOCUMENT_ROOT}/admin/$1/index.php -f
-RewriteRule ^admin/(.+)$ /admin/$1/index.php [L,QSA]
+RewriteCond %{DOCUMENT_ROOT}%{ENV:BASE}/admin/$1/index.php -f
+RewriteRule ^admin/(.+)$ admin/$1/index.php [L,QSA]
 
 # Público: /X -> public/X.php (login, register, logout, libro, prestamos/crear)
 RewriteCond %{ENV:REDIRECT_STATUS} ^$
-RewriteCond %{DOCUMENT_ROOT}/public/$1.php -f
-RewriteRule ^(.+)$ /public/$1.php [L,QSA]
+RewriteCond %{DOCUMENT_ROOT}%{ENV:BASE}/public/$1.php -f
+RewriteRule ^(.+)$ public/$1.php [L,QSA]
 
 # Público: /X -> public/X/index.php (prestamos)
 RewriteCond %{ENV:REDIRECT_STATUS} ^$
-RewriteCond %{DOCUMENT_ROOT}/public/$1/index.php -f
-RewriteRule ^(.+)$ /public/$1/index.php [L,QSA]
+RewriteCond %{DOCUMENT_ROOT}%{ENV:BASE}/public/$1/index.php -f
+RewriteRule ^(.+)$ public/$1/index.php [L,QSA]
 
 # Home: / -> public/index.php
 RewriteCond %{ENV:REDIRECT_STATUS} ^$
-RewriteRule ^/?$ /public/index.php [L]
+RewriteRule ^/?$ public/index.php [L]
+
+# Archivos reales (imagenes, etc.) que no matchearon ningun rewrite anterior
+# llegan a su archivo fisico.

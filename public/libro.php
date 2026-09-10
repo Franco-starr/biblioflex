@@ -6,10 +6,10 @@ use App\Libro;
 
 //validar el id
 $id = filter_var($_GET['id'], FILTER_VALIDATE_INT);
-if (!$id) header('Location: /');
+if (!$id) header('Location: ' . base_url('/'));
 
 $libro = Libro::findConCategoria($id);
-if (!$libro) header('Location: /');
+if (!$libro) header('Location: ' . base_url('/'));
 
 
 
@@ -37,7 +37,7 @@ incluirTemplate('header');
         <?php endif; ?>
 
         <div class="contenido-libro">
-            <img src="/imagenes/<?php echo s($libro->imagen); ?>" alt="Imagen de <?php echo s($libro->titulo); ?>">
+            <img src="<?php echo base_url('/imagenes/' . s($libro->imagen)); ?>" alt="Imagen de <?php echo s($libro->titulo); ?>">
 
             <div class="informacion">
                 <p class="autor">Autor: <?php echo s($libro->autor); ?></p>
@@ -50,7 +50,7 @@ incluirTemplate('header');
 
         <div class="acciones-libro">
             <?php if ($libro->stock > 0): ?>
-                <form action="/prestamos/crear" method="POST">
+                <form action="<?php echo base_url('/prestamos/crear'); ?>" method="POST">
                     <!-- Pasamos el ID del libro oculto -->
                     <input type="hidden" name="libro_id" value="<?php echo s($libro->id); ?>">
                     <p>Por libro solo podes pedir un prestamo</p>

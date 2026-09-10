@@ -3,7 +3,7 @@ require_once __DIR__ . '/../../includes/app.php';
 use App\Prestamo;
 
 if (!estaLogueado()) {
-    header('Location: /login');
+    header('Location: ' . base_url('/login'));
     exit;
 }
 
@@ -34,7 +34,7 @@ incluirTemplate('header');
                     <?php foreach($prestamos as $prestamo): ?>
                     <tr>
                         <td data-label="Libro">
-                            <img src="/imagenes/<?php echo s($prestamo->imagen); ?>" alt="<?php echo s($prestamo->titulo); ?>" width="50">
+                            <img src="<?php echo base_url('/imagenes/' . s($prestamo->imagen)); ?>" alt="<?php echo s($prestamo->titulo); ?>" width="50">
                             <?php echo s($prestamo->titulo); ?>
                         </td>
                         <td data-label="Fecha Préstamo"><?php echo s($prestamo->fecha_prestamo); ?></td>

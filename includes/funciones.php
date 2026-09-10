@@ -4,6 +4,17 @@ function incluirTemplate($nombre) {
     include __DIR__ . "/templates/{$nombre}.php";
 }
 
+// Ruta base de la app: '' si corre en la raiz del dominio (biblioflex.test,
+// InfinityFree) o '/subcarpeta' si corre debajo (localhost/biblioflex).
+function base_url($ruta = '') {
+    static $base = null;
+    if ($base === null) {
+        $s = $_SERVER['SCRIPT_NAME'] ?? '/index.php';
+        $base = preg_match('~^(.*?)/(public|admin)/~', $s, $m) ? rtrim($m[1], '/') : '';
+    }
+    return $base . $ruta;
+}
+
 
 function estaAutenticado() {
     if (session_status() === PHP_SESSION_NONE) {
@@ -11,7 +22,7 @@ function estaAutenticado() {
     }
 
     if(!isset($_SESSION['login']) || $_SESSION['login'] !== true) {
-        header('Location: /login');
+        header('Location: ' . base_url('/login'));
         exit;
     }
 }

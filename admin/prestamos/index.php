@@ -3,7 +3,7 @@ require_once __DIR__ . '/../../includes/app.php';
 estaAutenticado();
 
 if(!esAdmin()) {
-    header('Location: /');
+    header('Location: ' . base_url('/'));
     exit;
 }
 
@@ -22,12 +22,12 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         if($prestamo) {
             $resultado = $prestamo->devolverLibro();
             if($resultado) {
-                header('location: /admin/prestamos?resultado=4');
+                header('location: ' . base_url('/admin/prestamos?resultado=4'));
                 exit;
             } else {
                 $errores = Prestamo::getErrores();
                 $mensajeError = urlencode(implode('|', $errores));
-                header("location: /admin/prestamos?error={$mensajeError}");
+                header("location: " . base_url("/admin/prestamos?error={$mensajeError}"));
                 exit;
             }
         }
@@ -56,7 +56,7 @@ incluirTemplate('navbar');
     </div>
 <?php endif; ?>
 
-<a href="/admin" class="boton-azul">Volver</a>
+<a href="<?php echo base_url('/admin'); ?>" class="boton-azul">Volver</a>
 
 <div class="listado-datos">
 <table>
@@ -77,7 +77,7 @@ incluirTemplate('navbar');
         <tr>
             <td data-label="ID"><?php echo s($prestamo->id); ?></td>
             <td data-label="Libro">
-                <img src="/imagenes/<?php echo s($prestamo->imagen); ?>" alt="<?php echo s($prestamo->titulo); ?>" width="50">
+                <img src="<?php echo base_url('/imagenes/' . s($prestamo->imagen)); ?>" alt="<?php echo s($prestamo->titulo); ?>" width="50">
                 <?php echo s($prestamo->titulo); ?>
             </td>
             <td data-label="Usuario"><?php echo s($prestamo->nombre) . ' ' . s($prestamo->apellido); ?></td>

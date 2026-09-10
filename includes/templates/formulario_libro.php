@@ -49,7 +49,7 @@
         <label for="imagen">Imagen:</label>
         <input type="file" id="imagen" name="imagen" accept="image/jpeg, image/png">
         <?php if($libro->imagen) : ?>
-            <img src="/imagenes/<?php echo s($libro->imagen); ?>" class="imagen-small" style="width: 100px;">
+            <img src="<?php echo base_url('/imagenes/' . s($libro->imagen)); ?>" class="imagen-small" style="width: 100px;">
         <?php endif; ?>
     </div>
 

@@ -2,7 +2,7 @@
 require_once __DIR__ . '/../../includes/app.php';
 estaAutenticado();
 if (!esAdmin()) {
-    header('Location: /'); 
+    header('Location: ' . base_url('/')); 
     exit;
 }
 
@@ -36,7 +36,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
                 }
 
                 $categoria->eliminar();
-                header('location: /admin/categoria?resultado=3');
+                header('location: ' . base_url('/admin/categoria?resultado=3'));
                 exit;
             }
         }
@@ -50,7 +50,7 @@ incluirTemplate('header');
 <main class="main-content">
 <h1>Categorías</h1>
 
-<a href="/admin" class="boton-azul">Volver</a>
+<a href="<?php echo base_url('/admin'); ?>" class="boton-azul">Volver</a>
 
 
 <?php
@@ -59,7 +59,7 @@ incluirTemplate('header');
     <p class="alerta exito"><?php echo s($mensaje); ?></p>
 <?php } ?>
 
-<a href="/admin/categoria/crear" class="boton-azul">Agregar Categoría</a>
+<a href="<?php echo base_url('/admin/categoria/crear'); ?>" class="boton-azul">Agregar Categoría</a>
 
 <h2>Listado de Categorías</h2>
 <div class="listado-datos">
@@ -79,7 +79,7 @@ incluirTemplate('header');
             <td data-label="Nombre"><?php echo s($categoria->nombre); ?></td>
             <td data-label="Creado"><?php echo s($categoria->creado_ed); ?></td>
             <td data-label="Acciones">
-                <a href="/admin/categoria/editar?id=<?php echo s($categoria->id); ?>" class="boton-azul">Editar</a>
+                <a href="<?php echo base_url('/admin/categoria/editar?id=' . s($categoria->id)); ?>" class="boton-azul">Editar</a>
                 <form method="POST" class="w-100">
                     <input type="hidden" name="id" value="<?php echo s($categoria->id); ?>">
                     <input type="hidden" name="tipo" value="categoria">

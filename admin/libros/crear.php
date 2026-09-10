@@ -7,7 +7,7 @@ error_reporting(E_ALL);
 require_once __DIR__ . '/../../includes/app.php';
 estaAutenticado();
 if (!esAdmin()) {
-    header('Location: /'); 
+    header('Location: ' . base_url('/')); 
     exit;
 }
 
@@ -50,7 +50,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     if(empty($errores)) {
         $resultado = $libro->guardar();
         if($resultado) {
-            header('Location: /admin/libros?resultado=1');
+            header('Location: ' . base_url('/admin/libros?resultado=1'));
             exit;
         }
     }
@@ -62,7 +62,7 @@ incluirTemplate('header');
 <main class="main-content">
     <h1>Crear Libro</h1>
 
-    <a href="/admin" class="boton-azul">Volver</a>
+    <a href="<?php echo base_url('/admin'); ?>" class="boton-azul">Volver</a>
 
     <?php if(!empty($errores)) : ?>
         <div class="errores">
@@ -72,7 +72,7 @@ incluirTemplate('header');
         </div>
     <?php endif; ?>
 
-    <form class="formulario" method="POST" action="/admin/libros/crear" enctype="multipart/form-data">
+    <form class="formulario" method="POST" action="<?php echo base_url('/admin/libros/crear'); ?>" enctype="multipart/form-data">
        <?php include '../../includes/templates/formulario_libro.php'; ?>
     
         <input type="submit" value="Crear Libro" class="boton-verde">

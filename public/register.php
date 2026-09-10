@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $resultado = $stmt->execute();
 
         if ($resultado) {
-            header('Location: /login');
+            header('Location: ' . base_url('/login'));
             exit;
         }
     }
@@ -103,7 +103,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <button type="submit" class="boton-submit">Registrarse</button>
             </form>
 
-            <p class="link-secundario">¿Ya tenés cuenta? <a href="/login">Iniciá sesión</a></p>
+            <p class="link-secundario">¿Ya tenés cuenta? <a href="<?php echo base_url('/login'); ?>">Iniciá sesión</a></p>
         </div>
 
     </div>
