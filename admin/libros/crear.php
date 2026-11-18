@@ -14,37 +14,34 @@ if (!esAdmin()) {
 
 use App\Libro;
 use App\Categoria;
-use Intervention\Image\ImageManagerStatic as Image;
+use App\ProcesadorImagen;
 
 $libro = new Libro();
 
 $categorias = Categoria::all();
+$errores = [];
 
 if($_SERVER['REQUEST_METHOD'] === 'POST'){
     $libro = new Libro($_POST['libro']);
 
-    /** Subida de archivos **/
-    if(isset($_FILES['imagen']) && $_FILES['imagen']['error'] === UPLOAD_ERR_OK) {
-        $carpetaImagenes = __DIR__ . '/../../imagenes/';
-        if( !is_dir($carpetaImagenes) ) {
-            mkdir($carpetaImagenes, 0755, true);
-        }
-
-        $nombreImagen = md5( uniqid( rand(), true ) ) . ".jpg";
-        $libro->setImagen($nombreImagen);
-
-        Image::configure(['driver' => 'gd']);
-        $image = Image::make($_FILES['imagen']['tmp_name']);
-        $image->fit(800, 600);
-        $image->save($carpetaImagenes . $nombreImagen);
-    }
-
     $errores = $libro->validar();
 
-    if(empty($errores)) {
-        if(!$libro->imagen) {
-            $errores[] = "Debes subir una imagen del libro.";
+    /** Subida de archivos **/
+    if(isset($_FILES['imagen'])) {
+        if($_FILES['imagen']['error'] === UPLOAD_ERR_OK) {
+            try {
+                $nombreImagen = ProcesadorImagen::procesar($_FILES['imagen']['tmp_name']);
+                $libro->setImagen($nombreImagen);
+            } catch (\RuntimeException $e) {
+                $errores[] = $e->getMessage();
+            }
+        } elseif($_FILES['imagen']['error'] !== UPLOAD_ERR_NO_FILE) {
+            $errores[] = 'Hubo un problema al subir la imagen. Inténtalo de nuevo.';
         }
+    }
+
+    if(!$libro->imagen) {
+        $errores[] = "Debes subir una imagen del libro.";
     }
 
     if(empty($errores)) {
@@ -53,6 +50,10 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
             header('Location: ' . base_url('/admin/libros?resultado=1'));
             exit;
         }
+        $errores[] = 'No se pudo guardar el libro. Inténtalo de nuevo.';
+    } elseif(isset($nombreImagen)) {
+        @unlink(__DIR__ . '/../../imagenes/' . $nombreImagen);
+        $libro->imagen = '';
     }
 }
 

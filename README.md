@@ -38,6 +38,21 @@ Sistema de gestión de biblioteca desarrollado en PHP vanilla. Permite administr
 - Tablas con tarjetas apiladas en móvil
 - Detalle de libro apilado verticalmente en móvil
 
+## Portadas de libros
+
+- Las portadas se guardan en **WebP**, sin recortar y con un peso máximo de **150 KB**.
+- Se aceptan archivos JPG, PNG y WebP; se valida el tipo MIME real del archivo.
+- Al reemplazar la portada de un libro, la anterior se elimina.
+- Las imágenes se muestran completas (`object-fit: contain`) en catálogo, detalle y préstamos.
+
+Para migrar portadas antiguas a WebP, hacé primero una copia de `imagenes/` y de la base de datos, y después ejecutás:
+
+```bash
+php scripts/migrar_imagenes.php
+```
+
+El script omite los libros sin portada y las portadas que ya están en WebP. Si una conversión falla, conserva el archivo original, no modifica el registro e informa el libro afectado.
+
 ## Configuración de la base de datos
 
 ### Requisitos
@@ -103,7 +118,8 @@ biblioflex/
 │   │   ├── navbar.php      # Sidebar de navegación
 │   │   └── footer.php      # Pie de página
 │   ├── app.php             # Bootstrap de la aplicación
-│   └── funciones.php       # Funciones helper (auth, XSS, etc.)
+│   ├── funciones.php       # Funciones helper (auth, XSS, etc.)
+│   └── ProcesadorImagen.php # Conversión de portadas a WebP sin recorte
 ├── models/                 # Modelos ActiveRecord
 │   ├── ActiveRecord.php    # Clase base ORM
 │   ├── Libro.php
@@ -119,6 +135,8 @@ biblioflex/
 │   ├── login.php           # Inicio de sesión
 │   ├── register.php        # Registro de usuario
 │   └── logout.php          # Cierre de sesión
+├── scripts/                # Scripts de mantenimiento
+│   └── migrar_imagenes.php # Migración de portadas a WebP
 ├── sql/                    # Archivos SQL de la BD
 └── composer.json
 ```

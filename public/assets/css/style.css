@@ -272,7 +272,8 @@ p {
 .card img {
     width: 100%;
     height: 200px;
-    object-fit: cover;
+    object-fit: contain;
+    background-color: #2a2b2d;
     display: block;
 }
 
@@ -431,8 +432,11 @@ p {
 
 .contenido-libro img {
     width: 300px;
-    height: 400px;
-    object-fit: cover;
+    max-width: 100%;
+    height: auto;
+    max-height: 400px;
+    object-fit: contain;
+    background-color: #2a2b2d;
     border-radius: 6px;
     flex-shrink: 0;
 }
@@ -640,8 +644,18 @@ p {
 }
 
 .imagen-small {
+    height: auto;
+    object-fit: contain;
+    background-color: #2a2b2d;
     border-radius: 6px;
     margin-top: 0.5rem;
+}
+
+.ayuda-imagen {
+    display: block;
+    margin-top: 0.35rem;
+    color: #9a9a9a;
+    font-size: 0.8rem;
 }
 
 /* Botón submit */
@@ -725,8 +739,10 @@ p {
 
 .listado-datos img {
     width: 50px;
+    height: auto;
     border-radius: 4px;
-    object-fit: cover;
+    object-fit: contain;
+    background-color: #2a2b2d;
     vertical-align: middle;
     margin-right: 0.5rem;
 }
@@ -894,7 +910,8 @@ p {
 
     .contenido-libro img {
         width: 100%;
-        height: 300px;
+        height: auto;
+        max-height: 300px;
     }
 
     .acciones-libro {

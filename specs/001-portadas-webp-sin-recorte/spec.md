@@ -21,13 +21,17 @@ Hoy las portadas se recortan en el momento de subirse y se guardan en JPG, con l
 - RF-4: SI la portada no puede reducirse a 150 KB o menos, ENTONCES EL SISTEMA no guarda el libro e informa que la imagen es demasiado pesada.
 - RF-5: SI el archivo subido no es una imagen válida, ENTONCES EL SISTEMA rechaza la carga e informa el motivo sin guardar el libro.
 - RF-6: CUANDO se muestra una portada cuya proporción no coincide con el espacio disponible, EL SISTEMA muestra la imagen completa sin ocultar ninguna parte.
-- RF-7: CUANDO se migran las portadas existentes, EL SISTEMA conserva la imagen visible de cada libro ya cargado (salida: ningún libro queda sin portada por la conversión).
+- RF-7: CUANDO se migran las portadas existentes, EL SISTEMA conserva la imagen visible de cada libro que ya tenía portada (salida: ningún libro con portada previa queda sin ella por la conversión).
 - RF-8: SI una portada existente no puede convertirse, ENTONCES EL SISTEMA conserva el archivo original e informa qué portada falló.
 - RF-9: CUANDO el admin reemplaza la portada de un libro, EL SISTEMA deja de mostrar la portada anterior en todas las vistas.
+- RF-10: SI la carga de una portada falla al editar un libro, ENTONCES EL SISTEMA conserva los datos y la portada anteriores.
+- RF-11: CUANDO un libro no tiene portada cargada, EL SISTEMA lo deja sin imagen durante la migración.
+- RF-12: CUANDO una portada existente se convierte correctamente, EL SISTEMA elimina el archivo original.
 
 ## Requisitos no funcionales
 - Formato de salida: WebP.
 - Peso máximo por portada: 150 KB.
+- Resolución: sin límite de píxeles; se conserva la resolución original siempre que se cumpla el peso máximo.
 - Idioma de mensajes e interfaces: español.
 
 ## Casos límite
@@ -41,13 +45,18 @@ Hoy las portadas se recortan en el momento de subirse y se guardan en JPG, con l
 - Recorte manual o selección del área visible por parte del admin.
 - Varias imágenes por libro o galería de portadas.
 - Conversión de archivos que no sean portadas de libros.
+- Generación de alternativas JPG para navegadores sin soporte WebP.
 - Cambios de diseño de tarjetas, catálogo o detalle de libro (corresponde a la spec 002).
 
 ## Criterios de finalización
 - Toda portada nueva y toda portada migrada se muestra completa, está en WebP y pesa como máximo 150 KB.
+- Tras la migración, los originales convertidos correctamente ya no están, los que fallaron se conservan y los libros sin portada siguen sin ella.
 - Demo manual: subir una imagen vertical y una horizontal ancha, verificar catálogo y detalle sin recorte; reemplazar una portada y verificar que la anterior desaparece; verificar que los libros ya existentes siguen mostrando su portada tras la migración.
 
 ## Dudas abiertas
-- [NECESITA ACLARACIÓN] ¿Se requiere una alternativa en JPG para navegadores que no soporten WebP?
-- [NECESITA ACLARACIÓN] ¿Cuál debe ser el tamaño máximo en píxeles del lado mayor, dado que el tope de 150 KB no fija resolución?
-- [NECESITA ACLARACIÓN] ¿Los archivos originales se eliminan después de la conversión o se conservan como respaldo?
+Ninguna. Las dudas iniciales se resolvieron así:
+1. Originales JPG: se eliminan solo si la conversión salió bien; se conservan si falló.
+2. Fallback JPG para navegadores sin WebP: no se genera.
+3. Tamaño máximo en píxeles: no hay tope; solo el límite de 150 KB.
+4. Fallo al editar una portada: no se guarda nada y se conservan los datos y la portada anteriores.
+5. Libros sin imagen cargada: la migración los deja sin imagen; solo convierte los que ya tienen archivo.

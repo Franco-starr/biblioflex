@@ -34,8 +34,8 @@ Regla: si algo no está en la spec, no se implementa. Si la spec y el plan difie
 Marcadas como `[NECESITA ACLARACIÓN]` en los specs y con valor por defecto en el plan:
 
 1. Atraso automático al vencer la fecha (por defecto: solo manual).
-2. Borrado de los JPG originales tras la migración (por defecto: conservar).
-3. Fallback JPG para navegadores sin WebP (por defecto: no generar).
+2. Borrado de los JPG originales tras la migración — **resuelta en 001**: eliminar si la conversión salió bien; conservar si falló.
+3. Fallback JPG para navegadores sin WebP — **resuelta en 001**: no se genera.
 4. Cambios concretos de UI/UX além de las secciones (sin definir).
 5. Datos de contacto a mostrar (por defecto: correo electrónico).
 6. Fecha límite obligatoria y con tope de días (por defecto: obligatoria, sin tope).

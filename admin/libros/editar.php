@@ -10,8 +10,8 @@ if (!esAdmin()) {
 
 use App\Libro;
 use App\Categoria;
-use Intervention\Image\ImageManagerStatic as Image;
-    
+use App\ProcesadorImagen;
+
 $id = $_GET['id'];
 $id = filter_var($id, FILTER_VALIDATE_INT);
 
@@ -28,33 +28,44 @@ $errores = Libro::getErrores();
 
 if($_SERVER['REQUEST_METHOD'] === 'POST'){
     
+    $libroOriginal = clone $libro;
+
     $args = $_POST['libro']; 
     $libro->sincronizar($args);
 
     $errores = $libro->validar();
 
-    $carpetaImagenes = __DIR__ . '/../../imagenes/';
-
-    if(isset($_FILES['imagen']) && $_FILES['imagen']['error'] === UPLOAD_ERR_OK) {
-        if( !is_dir($carpetaImagenes) ) {
-            mkdir($carpetaImagenes, 0755, true);
+    /** Subida de archivos **/
+    if(isset($_FILES['imagen'])) {
+        if($_FILES['imagen']['error'] === UPLOAD_ERR_OK) {
+            try {
+                $nuevaImagen = ProcesadorImagen::procesar($_FILES['imagen']['tmp_name']);
+            } catch (\RuntimeException $e) {
+                $errores[] = $e->getMessage();
+            }
+        } elseif($_FILES['imagen']['error'] !== UPLOAD_ERR_NO_FILE) {
+            $errores[] = 'Hubo un problema al subir la imagen. Inténtalo de nuevo.';
         }
-
-        $nombreImagen = md5(uniqid(rand(), true)) . ".jpg";
-        $libro->setImagen($nombreImagen);
-
-        Image::configure(['driver' => 'gd']);
-        $image = Image::make($_FILES['imagen']['tmp_name']);
-        $image->fit(800, 600);
-        $image->save($carpetaImagenes . $nombreImagen);
     }
 
-    if(empty($errores)) {
+    if(!empty($errores)) {
+        // No se guarda nada: se conservan los datos y la portada anteriores
+        if(isset($nuevaImagen)) {
+            @unlink(__DIR__ . '/../../imagenes/' . $nuevaImagen);
+        }
+        $libro = $libroOriginal;
+    } else {
+        if(isset($nuevaImagen)) {
+            $libro->setImagen($nuevaImagen); // Borra la portada anterior al reemplazarla
+        }
+
         $resultado = $libro->guardar();
         if($resultado) {
             header('Location: ' . base_url('/admin/libros?resultado=2'));
             exit;
         }
+        $errores[] = 'No se pudo guardar el libro. Inténtalo de nuevo.';
+        $libro = $libroOriginal;
     }
 }
 

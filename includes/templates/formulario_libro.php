@@ -47,7 +47,8 @@
 
     <div class="campo">
         <label for="imagen">Imagen:</label>
-        <input type="file" id="imagen" name="imagen" accept="image/jpeg, image/png">
+        <input type="file" id="imagen" name="imagen" accept="image/jpeg, image/png, image/webp">
+        <small class="ayuda-imagen">Se guarda como WebP, sin recortar y con un máximo de 150 KB.</small>
         <?php if($libro->imagen) : ?>
             <img src="<?php echo base_url('/imagenes/' . s($libro->imagen)); ?>" class="imagen-small" style="width: 100px;">
         <?php endif; ?>
