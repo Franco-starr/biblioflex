@@ -14,7 +14,7 @@ Regla: si algo no está en la spec, no se implementa. Si la spec y el plan difie
 
 | # | Funcionalidad | Spec | Plan | Tasks | Estado |
 |---|---|---|---|---|---|
-| 001 | Portadas completas y livianas en WebP | [spec](001-portadas-webp-sin-recorte/spec.md) | [plan](001-portadas-webp-sin-recorte/plan.md) | [tasks](001-portadas-webp-sin-recorte/tasks.md) | Aprobada · sin implementar |
+| 001 | Portadas completas y livianas en WebP | [spec](001-portadas-webp-sin-recorte/spec.md) | [plan](001-portadas-webp-sin-recorte/plan.md) | [tasks](001-portadas-webp-sin-recorte/tasks.md) | Implementada · 29/29 tareas |
 | 002 | Secciones públicas "Sobre mí" y "Contacto" | [spec](002-secciones-sobre-mi-contacto/spec.md) | [plan](002-secciones-sobre-mi-contacto/plan.md) | [tasks](002-secciones-sobre-mi-contacto/tasks.md) | Aprobada · sin implementar |
 | 003 | Solicitudes pendientes y confirmación del admin | [spec](003-estados-prestamo-admin/spec.md) | [plan](003-estados-prestamo-admin/plan.md) | [tasks](003-estados-prestamo-admin/tasks.md) | Aprobada · sin implementar |
 | 004 | Fecha límite de devolución definida por el admin | [spec](004-fecha-limite-admin/spec.md) | [plan](004-fecha-limite-admin/plan.md) | [tasks](004-fecha-limite-admin/tasks.md) | Aprobada · sin implementar |

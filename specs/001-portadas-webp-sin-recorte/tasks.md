@@ -7,7 +7,7 @@ Cada tarea indica los RF que cubre. Marcar `[x]` solo cuando la verificación pa
 ## Fase 1 — Preparación
 
 - [x] T-001 Verificar `function_exists('imagewebp')`; si no está, configurar Imagick como driver de Intervention Image. *(RF-2)*
-- [ ] T-002 Hacer copia de seguridad de `imagenes/` y de la base de datos antes de cualquier migración. *(RF-7)*
+- [x] T-002 Hacer copia de seguridad de `imagenes/` y de la base de datos antes de cualquier migración. *(RF-7)*
 
 ## Fase 2 — Procesador de imágenes
 
@@ -19,19 +19,19 @@ Cada tarea indica los RF que cubre. Marcar `[x]` solo cuando la verificación pa
 
 ## Fase 3 — Alta y edición de libros
 
-- [ ] T-008 Ampliar `accept` en `formulario_libro.php` a JPEG, PNG y WebP, con texto de ayuda del tope. *(RF-1, RF-5)*
-- [ ] T-009 Refactorizar `admin/libros/crear.php` para usar el procesador en lugar de `fit(800,600)`. *(RF-1 a RF-5)*
-- [ ] T-010 Refactorizar `admin/libros/editar.php` con el mismo procesador. *(RF-1 a RF-5)*
-- [ ] T-011 Verificar que `setImagen()` borre la portada anterior al reemplazarla. *(RF-9)*
-- [ ] T-012 Verificar que los errores se muestren en el formulario, que el libro no se guarde y que se conserven datos y portada anterior al editar. *(RF-4, RF-5, RF-10)*
+- [x] T-008 Ampliar `accept` en `formulario_libro.php` a JPEG, PNG y WebP, con texto de ayuda del tope. *(RF-1, RF-5)*
+- [x] T-009 Refactorizar `admin/libros/crear.php` para usar el procesador en lugar de `fit(800,600)`. *(RF-1 a RF-5)*
+- [x] T-010 Refactorizar `admin/libros/editar.php` con el mismo procesador. *(RF-1 a RF-5)*
+- [x] T-011 Verificar que `setImagen()` borre la portada anterior al reemplazarla. *(RF-9)*
+- [x] T-012 Verificar que los errores se muestren en el formulario, que el libro no se guarde y que se conserven datos y portada anterior al editar. *(RF-4, RF-5, RF-10)*
 
 ## Fase 4 — Presentación
 
-- [ ] T-013 Cambiar `.card img` a `object-fit: contain` con fondo. *(RF-6)*
-- [ ] T-014 Cambiar `.contenido-libro img` a `object-fit: contain` sin alto forzado. *(RF-6)*
-- [ ] T-015 Cambiar miniaturas de tablas a `object-fit: contain`. *(RF-6)*
-- [ ] T-016 Revisar media queries móviles para que no reintroduzcan `cover`. *(RF-6)*
-- [ ] T-017 Verificar portada completa en catálogo, detalle y listado de préstamos. *(RF-6)*
+- [x] T-013 Cambiar `.card img` a `object-fit: contain` con fondo. *(RF-6)*
+- [x] T-014 Cambiar `.contenido-libro img` a `object-fit: contain` sin alto forzado. *(RF-6)*
+- [x] T-015 Cambiar miniaturas de tablas a `object-fit: contain`. *(RF-6)*
+- [x] T-016 Revisar media queries móviles para que no reintroduzcan `cover`. *(RF-6)*
+- [x] T-017 Verificar portada completa en catálogo, detalle y listado de préstamos. *(RF-6)*
 
 ## Fase 5 — Migración de portadas existentes
 
@@ -47,7 +47,7 @@ Cada tarea indica los RF que cubre. Marcar `[x]` solo cuando la verificación pa
 - [x] T-024 Probar subida de imagen vertical, horizontal ancha, PNG y WebP.
 - [x] T-025 Probar archivo inválido y archivo que no puede bajar de 150 KB, verificando que no se guarda el libro y se conserva la portada anterior al editar.
 - [x] T-026 Medir peso de las portadas generadas y migradas (≤ 150 KB).
-- [ ] T-027 Demo manual de alta, reemplazo y migración en escritorio y móvil.
+- [x] T-027 Demo manual de alta, reemplazo y migración en escritorio y móvil.
 - [x] T-028 Verificar que los libros sin imagen siguen sin imagen tras la migración. *(RF-11)*
 - [x] T-029 Verificar que no se genera ningún archivo JPG de fallback. *(RF-2)*
 
