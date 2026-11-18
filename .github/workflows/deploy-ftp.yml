@@ -41,6 +41,12 @@ jobs:
             .git/**
             .github/
             .github/**
+            .agents
+            .agents/**
+            .opencode
+            .opencode/**
+            specs/
+            specs/**
             imagenes/
             imagenes/**
             .env
